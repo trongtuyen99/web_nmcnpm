@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package nhom8.shoppingweb.config;
 
 import javax.sql.DataSource;
@@ -25,7 +20,9 @@ import org.springframework.security.web.authentication.rememberme.PersistentToke
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
- 
+    /*
+        Cài đặt Spring Security để phân quyền khi đăng nhập.
+    */
     @Autowired
     private UserDetailsServiceImpl userDetailsService;
  
@@ -41,8 +38,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
  
-        // Set đặt dịch vụ để tìm kiếm User trong Database.
-        // Và sét đặt PasswordEncoder.
+        // Cài đặt dịch vụ để tìm kiếm User trong Database.
+        // Và cài đặt PasswordEncoder.
         auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
  
     }
@@ -51,45 +48,46 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
  
         http.csrf().disable();
- 
-        // Các trang không yêu cầu login
-        http.authorizeRequests().antMatchers("/", "/login", "/logout").permitAll();
- 
-        // Trang /userInfo yêu cầu phải login với vai trò ROLE_USER hoặc ROLE_ADMIN.
+        // Các trang không yêu cầu login, không yêu cầu role nào  
+        http.authorizeRequests().antMatchers("/", "/logout").permitAll();
+        // Các trang chỉ truy cập được khi là khách
+        http.authorizeRequests().antMatchers("/login").access("isAnonymous()");
+        // Các trang yêu cầu phải login với vai trò ROLE_USER hoặc ROLE_ADMIN.
         // Nếu chưa login, nó sẽ redirect tới trang /login.
-        // lưu ý tên role là 'ROLE_USER ' (đủ 10 ký tự) chứ không phải 'ROLE_USER' (9 ký tự)
-        // vì thuộc tính quyenTruyCap có kiểu char(10) cố định 10 ký tự
+        // lưu ý tên role là 'ROLE_USER ' (10 ký tự) chứ không phải 'ROLE_USER' (9 ký tự)
+        // vì thuộc tính quyenTruyCap trong database có kiểu char(10) cố định 10 ký tự
         http.authorizeRequests().antMatchers("/userInfo").access("hasAnyRole('ROLE_USER ', 'ROLE_ADMIN')");
  
-        // Trang chỉ dành cho ADMIN
+        // Các trang yêu cầu phải login với vai trò ROLE_ADMIN
         http.authorizeRequests().antMatchers("/admin").access("hasRole('ROLE_ADMIN')");
  
         // Khi người dùng đã login, với vai trò XX.
         // Nhưng truy cập vào trang yêu cầu vai trò YY,
-        // Ngoại lệ AccessDeniedException sẽ ném ra.
+        // Ngoại lệ AccessDeniedException sẽ ném ra, dẫn tới /403.
         http.authorizeRequests().and().exceptionHandling().accessDeniedPage("/403");
  
         // Cấu hình cho Login Form.
-        http.authorizeRequests().and().formLogin()//
+        http.authorizeRequests().and().formLogin()
                 // Submit URL của trang login
                 .loginProcessingUrl("/j_spring_security_check") // Submit URL
-                .loginPage("/login")//
-                .defaultSuccessUrl("/userAccountInfo")//
-                .failureUrl("/login?error=true")//
-                .usernameParameter("username")//
+                .loginPage("/login") // trang login
+                .defaultSuccessUrl("/userAccountInfo") // login thành công
+                .failureUrl("/login?error=true") // login thất bại
+                .usernameParameter("username")
                 .passwordParameter("password")
                 // Cấu hình cho Logout Page.
                 .and().logout().logoutUrl("/logout").logoutSuccessUrl("/logoutSuccessful");
  
         // Cấu hình Remember Me.
-        http.authorizeRequests().and() //
-                .rememberMe().tokenRepository(this.persistentTokenRepository()) //
-                .tokenValiditySeconds(86400); // 24h
+        http.authorizeRequests().and() 
+                .rememberMe().tokenRepository(this.persistentTokenRepository())
+                .tokenValiditySeconds(86400); // = 24h
  
     }
  
     @Bean
     public PersistentTokenRepository persistentTokenRepository() {
+        // lưu token trong memory
         InMemoryTokenRepositoryImpl memory = new InMemoryTokenRepositoryImpl();
         return memory;
     }

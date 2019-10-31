@@ -16,6 +16,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
  
 @Controller
 public class MainController {
+    /*
+        Controller. Xử lý các request GET, POST,...
+    */
  
     @RequestMapping(value = { "/", "/welcome" }, method = RequestMethod.GET)
     public String welcomePage(Model model) {
@@ -36,9 +39,9 @@ public class MainController {
     }
  
     @RequestMapping(value = "/login", method = RequestMethod.GET)
-    public String loginPage(Model model) {
+    public String login(Model model) {
  
-        return "loginPage";
+        return "login";
     }
  
     @RequestMapping(value = "/logoutSuccessful", method = RequestMethod.GET)
@@ -50,7 +53,7 @@ public class MainController {
     @RequestMapping(value = "/userInfo", method = RequestMethod.GET)
     public String userInfo(Model model, Principal principal) {
  
-        // Sau khi user login thanh cong se co principal
+        // Sau khi user login thành công, sẽ có principal
         String userName = principal.getName();
  
         System.out.println("User Name: " + userName);

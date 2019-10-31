@@ -21,6 +21,9 @@ import org.springframework.stereotype.Service;
  
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService {
+    /*
+        Tạo đối tượng User từ dữ liệu nhập vào.
+    */
     
     @Autowired
     private NguoiDungDAO nguoiDungDAO;
@@ -39,7 +42,8 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         List<GrantedAuthority> grantList = new ArrayList<GrantedAuthority>();
         GrantedAuthority auth = new SimpleGrantedAuthority(nguoiDung.getQuyenTruyCap());
         grantList.add(auth);
- 
+        
+        // tạo một người dùng mới với tdn, mk và danh sách quyền truy cập.
         UserDetails userDetails = (UserDetails) new User(nguoiDung.getTenDangNhap(), //
                 nguoiDung.getMatKhau(), grantList);
  
