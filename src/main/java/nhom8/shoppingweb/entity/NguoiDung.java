@@ -9,14 +9,10 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
-/**
- *
- * @author Phong
- */
 @Entity(name = "NguoiDung")
 @Table(name = "NGUOIDUNG")
 // Nếu tên bảng ở database là NguoiDung thì trong này viết hoa hết như trên nha
-// Không là bị lỗi, còn lỗi gì đéo biết
+// Không là bị lỗi, còn lỗi gì ko biết
 public class NguoiDung implements Serializable{
     /*
         Tạo ra 1 entity từ bảng NguoiDung trong database.

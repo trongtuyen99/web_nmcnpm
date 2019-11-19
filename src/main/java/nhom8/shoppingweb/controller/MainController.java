@@ -39,6 +39,11 @@ public class MainController {
  
         return "login";
     }
+    @RequestMapping(value = "/login.html", method = RequestMethod.GET)
+    public String loginhtml(Model model) {
+
+        return "login";
+    }
  
     @RequestMapping(value = "/logoutSuccessful", method = RequestMethod.GET)
     public String logoutSuccessfulPage(Model model) {
@@ -80,5 +85,28 @@ public class MainController {
  
         return "403Page";
     }
- 
+    @RequestMapping(value = "/index.html", method = RequestMethod.GET)
+    public String index(Model model){
+        return "index";
+    }
+    @RequestMapping(value = "/register.html", method = RequestMethod.GET)
+    public String register(Model model){
+        return "register.html";
+    }
+    @RequestMapping(value = "/product.html", method = RequestMethod.GET)
+    public String product(Model model){
+        return "product";
+    }
+    @RequestMapping(value = "/single.html", method = RequestMethod.GET)
+    public String single(Model model){
+        return "single.html";
+    }
+    @RequestMapping(value = "/sample.html", method = RequestMethod.GET)
+    public String sample(Model model){
+        return "sample";
+    }
+    @RequestMapping(value = "/contact.html", method = RequestMethod.GET)
+    public String contact(Model model){
+        return "contact";
+    }
 }

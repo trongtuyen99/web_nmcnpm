@@ -1,9 +1,5 @@
 package nhom8.shoppingweb.utils;
 
-/**
- *
- * @author Phong
- */
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
  
 public class EncryptedPasswordUtils {

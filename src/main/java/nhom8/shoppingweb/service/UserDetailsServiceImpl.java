@@ -1,10 +1,5 @@
 package nhom8.shoppingweb.service;
 
-/**
- *
- * @author Phong
- */
- 
 import java.util.ArrayList;
 import java.util.List;
 
