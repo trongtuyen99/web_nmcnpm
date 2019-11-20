@@ -18,28 +18,28 @@ public class NguoiDung implements Serializable{
         Tạo ra 1 entity từ bảng NguoiDung trong database.
         1 entity tương đương với 1 bảng.
     */
- 
+
     @Id
     @GeneratedValue
     @Column(name = "MAND", nullable = false)
     // Tên thuộc tính MaND cũng viết hoa hết thành MAND luôn.
     private int maND;
- 
+
     @Column(name = "TENDANGNHAP", length = 15, nullable = false)
     private String tenDangNhap;
- 
+
     @Column(name = "MATKHAU", length = 15, nullable = false)
     private String matKhau;
- 
+
     @Column(name = "HOTEN", length = 50, nullable = false)
     private String hoTen;
-    
+
     @Column(name = "SDT", length = 15, nullable = false)
     private String sdt;
-    
+
     @Column(name = "EMAIL", length = 50, nullable = false)
     private String email;
-    
+
     @Column(name = "QUYENTRUYCAP", length = 10, nullable = false)
     private String quyenTruyCap;
 
@@ -98,5 +98,5 @@ public class NguoiDung implements Serializable{
     public void setQuyenTruyCap(String quyenTruyCap) {
         this.quyenTruyCap = quyenTruyCap;
     }
- 
+
 }

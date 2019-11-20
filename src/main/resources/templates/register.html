@@ -5,19 +5,22 @@ License: Creative Commons Attribution 3.0 Unported
 License URL: http://creativecommons.org/licenses/by/3.0/
 -->
 <!DOCTYPE html>
-<html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
-<title>Big shope A Ecommerce Category Flat Bootstarp Resposive Website Template | Register :: w3layouts</title>
-<link href="css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
-<!--theme-style-->
-<link href="css/style.css" rel="stylesheet" type="text/css" media="all" />	
-<!--//theme-style-->
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
-<!--fonts-->
-<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800' rel='stylesheet' type='text/css'>
-<!--//fonts-->
-<script src="js/jquery.min.js"></script>
+	<meta charset="UTF-8"/>
+	<title>Login</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+	<link th:href="@{/css/bootstrap.css}" rel="stylesheet" type="text/css" media="all" />
+	<!--theme-style-->
+	<link th:href="@{/css/style.css}" rel="stylesheet" type="text/css" media="all" />
+	<!--//theme-style-->
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+	<!--fonts-->
+	<link th:href="@{http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800}" rel="stylesheet" type="text/css">
+	<!--//fonts-->
+	<script th:src="@{/js/jquery.min.js}"></script>
+</head>
 
 
 </head>
@@ -89,41 +92,44 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 	<div class="container"> 
 			         
 		<div class="register">
-		  	  <form> 
+		  	  <form th:action="@{/register.html}" th:object="${user}" method="post">
 				 <div class="  register-top-grid">
 					<h3>PERSONAL INFORMATION</h3>
 					<div class="mation">
 						<span>First Name<label>*</label></span>
-						<input type="text"> 
+						<input type="text" th:field="*{FIRSTNAME}">
 					
 						<span>Last Name<label>*</label></span>
-						<input type="text"> 
+						<input type="text" th:field="*{LASTNAME}">
 					 
 						 <span>Email Address<label>*</label></span>
-						 <input type="text"> 
+						 <input type="text" th:field="*{EMAIL}">
 					</div>
 					 <div class="clearfix"> </div>
-					   <a class="news-letter" href="#">
-						 <label class="checkbox"><input type="checkbox" name="checkbox" checked=""><i> </i>Sign Up</label>
-					   </a>
+<!--					   <a class="news-letter" href="#">-->
+<!--						 <label class="checkbox"><input type="checkbox" name="checkbox" checked=""><i> </i>Sign Up</label>-->
+<!--					   </a>-->
 					 </div>
 				     <div class="  register-bottom-grid">
 						    <h3>LOGIN INFORMATION</h3>
 							<div class="mation">
+								<span>Username<label>*</label></span>
+								<input type="text" th:field="*{USERNAME}">
 								<span>Password<label>*</label></span>
-								<input type="text">
-								<span>Confirm Password<label>*</label></span>
-								<input type="text">
+								<input type="text" th:field="*{PASSWORD}">
+<!--								<span>Confirm Password<label>*</label></span>-->
+<!--								<input type="text">-->
 							</div>
 					 </div>
+				  <div class="register-but">
+					  <form>
+						  <input type="submit" value="submit">
+						  <div class="clearfix"> </div>
+					  </form>
+				  </div>
 				</form>
 				<div class="clearfix"> </div>
-				<div class="register-but">
-				   <form>
-					   <input type="submit" value="submit">
-					   <div class="clearfix"> </div>
-				   </form>
-				</div>
+
 		   </div>
 		   <div class="sub-cate">
 				<div class=" top-nav rsidebar span_1_of_left">

@@ -1,6 +1,8 @@
 package nhom8.shoppingweb.config;
 
 import javax.sql.DataSource;
+
+import nhom8.shoppingweb.model.UserValidator;
 import nhom8.shoppingweb.service.UserDetailsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -21,30 +23,30 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     */
     @Autowired
     private UserDetailsServiceImpl userDetailsService;
- 
+
     @Autowired
     private DataSource dataSource;
- 
+
     @Bean
     public BCryptPasswordEncoder passwordEncoder() {
         BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
         return bCryptPasswordEncoder;
     }
- 
+
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
- 
+
         // Cài đặt dịch vụ để tìm kiếm User trong Database.
         // Và cài đặt PasswordEncoder.
         auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
- 
+
     }
- 
+
     @Override
     protected void configure(HttpSecurity http) throws Exception {
- 
+
         http.csrf().disable();
-        // Các trang không yêu cầu login, không yêu cầu role nào  
+        // Các trang không yêu cầu login, không yêu cầu role nào
         http.authorizeRequests().antMatchers("/", "/logout").permitAll();
         // Các trang chỉ truy cập được khi là khách
         http.authorizeRequests().antMatchers("/login").access("isAnonymous()");
@@ -53,15 +55,15 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         // lưu ý tên role là 'ROLE_USER ' (10 ký tự) chứ không phải 'ROLE_USER' (9 ký tự)
         // vì thuộc tính quyenTruyCap trong database có kiểu char(10) cố định 10 ký tự
         http.authorizeRequests().antMatchers("/userInfo").access("hasAnyRole('ROLE_USER ', 'ROLE_ADMIN')");
- 
+
         // Các trang yêu cầu phải login với vai trò ROLE_ADMIN
         http.authorizeRequests().antMatchers("/admin").access("hasRole('ROLE_ADMIN')");
- 
+
         // Khi người dùng đã login, với vai trò XX.
         // Nhưng truy cập vào trang yêu cầu vai trò YY,
         // Ngoại lệ AccessDeniedException sẽ ném ra, dẫn tới /403.
         http.authorizeRequests().and().exceptionHandling().accessDeniedPage("/403");
- 
+
         // Cấu hình cho Login Form.
         http.authorizeRequests().and().formLogin()
                 // Submit URL của trang login
@@ -73,18 +75,28 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .passwordParameter("password")
                 // Cấu hình cho Logout Page.
                 .and().logout().logoutUrl("/logout").logoutSuccessUrl("/logoutSuccessful");
- 
+
         // Cấu hình Remember Me.
-        http.authorizeRequests().and() 
+        http.authorizeRequests().and()
                 .rememberMe().tokenRepository(this.persistentTokenRepository())
                 .tokenValiditySeconds(86400); // = 24h
- 
+
     }
- 
+
     @Bean
     public PersistentTokenRepository persistentTokenRepository() {
         // lưu token trong memory
         InMemoryTokenRepositoryImpl memory = new InMemoryTokenRepositoryImpl();
         return memory;
+    }
+    public class UserConfig {
+        /**
+         * Tạo ra Bean UserValidator để sử dụng sau này
+         * @return
+         */
+        @Bean
+        public UserValidator validator() {
+            return new UserValidator();
+        }
     }
 }
