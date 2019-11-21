@@ -21,6 +21,7 @@ public class UserValidator {
                 .filter(t -> !StringUtils.isEmpty(t.getEMAIL()))
                 .filter(t -> !StringUtils.isEmpty(t.getUSERNAME()))
                 .filter(t -> !StringUtils.isEmpty(t.getPASSWORD()))
+                .filter(t -> StringUtils.equals(t.getCPASSWORD(),t.getPASSWORD()))
                 .isPresent(); // Trả về true nếu hợp lệ, ngược lại false
     }
 }

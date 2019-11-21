@@ -987,7 +987,7 @@ a.forgot {
 .register-but{
 	margin-top:1em;
 }
-.register-but form input[type="submit"] {
+.register-but input[type="submit"] {
 	background:#F97E76;
 	color: #FFF;
 	font-size:1em;
@@ -1531,7 +1531,7 @@ img.banner-bag {
     height: 121px;
     overflow: hidden;
 }
-single.htmlmedia="all"
+/*single.htmlmedia="all"*/
 p {
     margin: 0 0 10px;
 }

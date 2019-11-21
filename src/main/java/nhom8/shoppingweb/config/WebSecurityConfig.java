@@ -2,6 +2,7 @@ package nhom8.shoppingweb.config;
 
 import javax.sql.DataSource;
 
+import nhom8.shoppingweb.model.MessageValidator;
 import nhom8.shoppingweb.model.UserValidator;
 import nhom8.shoppingweb.service.UserDetailsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -95,8 +96,18 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
          * @return
          */
         @Bean
-        public UserValidator validator() {
+        public UserValidator uvalidator() {
             return new UserValidator();
+        }
+    }
+    public class MessageConfig {
+        /**
+         * Tạo ra Bean MessageValidator để sử dụng sau này
+         * @return
+         */
+        @Bean
+        public MessageValidator mvalidator() {
+            return new MessageValidator();
         }
     }
 }

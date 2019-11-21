@@ -3,6 +3,8 @@ package nhom8.shoppingweb.controller;
 import java.security.Principal;
 import java.util.Optional;
 
+import nhom8.shoppingweb.model.Message;
+import nhom8.shoppingweb.service.MessageService;
 import nhom8.shoppingweb.service.UserService;
 import nhom8.shoppingweb.utils.WebUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +14,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.management.modelmbean.ModelMBean;
+
 @Controller
 public class MainController {
     /*
@@ -19,10 +23,11 @@ public class MainController {
     */
     @Autowired
     private UserService userService;
-
+    @Autowired
+    private MessageService messageService;
     @GetMapping("/register.html")
-    public String addUser(Model model) {
-        model.addAttribute("user", new nhom8.shoppingweb.model.User());
+    public String addUser(Model modelu) {
+        modelu.addAttribute("user", new nhom8.shoppingweb.model.User());
         return "register";
     }
 
@@ -35,6 +40,25 @@ public class MainController {
                 .map(t -> "success")
                 .orElse("failed");
     }
+    @GetMapping("/contact.html")
+    public String addMessage(Model modelm) {
+        modelm.addAttribute("msg", new Message());
+        return "contact";
+    }
+
+    /*
+    @ModelAttribute đánh dấu đối tượng Message được gửi lên bởi Form Request
+     */
+    @PostMapping("/contact.html")
+    public String addMessage(@ModelAttribute Message msg) {
+        return Optional.ofNullable(messageService.add(msg))
+                .map(t -> "msuccess")
+                .orElse("mfailed");
+    }
+
+
+
+
     @RequestMapping(value = { "/", "/welcome" }, method = RequestMethod.GET)
     public String welcomePage(Model model) {
         model.addAttribute("title", "Welcome");
@@ -122,11 +146,6 @@ public class MainController {
     @RequestMapping(value = "/sample.html", method = RequestMethod.GET)
     public String sample(Model model){
         return "sample";
-    }
-
-    @RequestMapping(value = "/contact.html", method = RequestMethod.GET)
-    public String contact(Model model){
-        return "contact";
     }
 
 }

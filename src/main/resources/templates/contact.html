@@ -5,23 +5,24 @@ License: Creative Commons Attribution 3.0 Unported
 License URL: http://creativecommons.org/licenses/by/3.0/
 -->
 <!DOCTYPE html>
-<html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
-<title>Big shope A Ecommerce Category Flat Bootstarp Resposive Website Template | Contact :: w3layouts</title>
-<link href="css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
-<!--theme-style-->
-<link href="css/style.css" rel="stylesheet" type="text/css" media="all" />	
-<!--//theme-style-->
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
-<!--fonts-->
-<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800' rel='stylesheet' type='text/css'>
-<!--//fonts-->
-<script src="js/jquery.min.js"></script>
-
-
-<!--script-->
+	<meta charset="UTF-8"/>
+	<title>Contact</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+	<link th:href="@{/css/bootstrap.css}" rel="stylesheet" type="text/css" media="all" />
+	<!--theme-style-->
+	<link th:href="@{/css/style.css}" rel="stylesheet" type="text/css" media="all" />
+	<!--//theme-style-->
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+	<!--fonts-->
+	<link th:href="@{http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800}" rel="stylesheet" type="text/css">
+	<!--//fonts-->
+	<script th:src="@{/js/jquery.min.js}"></script>
 </head>
+
+
 <body> 
 	<!--header-->
 	<div class="header">
@@ -95,10 +96,13 @@ License URL: http://creativecommons.org/licenses/by/3.0/
             	<div class=" contact_right">
             		<h3>Contact Form</h3>
             		<div class="contact-form">
-							<form method="post" action="contact-post.html">
-								<input type="text" class="textbox" value="Name" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Name';}">
-								<input type="text" class="textbox" value="Email" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Email';}">
-								<textarea value="Message" onfocus="this.value= '';" onblur="if (this.value == '') {this.value = 'Message';}">Message</textarea>
+							<form th:action="@{/contact.html}" th:object="${msg}" method="post">
+<!--								<span>Name<label>*</label></span>-->
+								<input type="text" placeholder="Name" th:field="*{NAME} ">
+<!--								<span>Email<label>*</label></span>-->
+								<input type="text" placeholder="Email" th:field="*{EMAIL}">
+<!--								<span>Message<label>*</label></span>-->
+								<textarea value="Message" placeholder="Message" th:field="*{MESSAGE} ">Message</textarea>
 								<input type="submit" value="Send">
 								<div class="clearfix"> </div>
 							</form>
