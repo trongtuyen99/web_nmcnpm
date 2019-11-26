@@ -43,6 +43,7 @@ public class UserService {
         if (uvalidator.isValid(user)) {
             user.setPASSWORD(EncryptedPasswordUtils.encryptedPassword(user.getPASSWORD()));
             user.setCPASSWORD(EncryptedPasswordUtils.encryptedPassword(user.getCPASSWORD()));
+            user.setQUYENTRUYCAP("ROLE_USER ");
             return userRepository.save(user);
         }
         return null;

@@ -11,10 +11,11 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long ID;
-    private String FIRSTNAME;
-    private String LASTNAME;
+    private String FULLNAME;
+    private String PHONE;
     private String EMAIL;
     private String USERNAME;
+    private String QUYENTRUYCAP;
     private String PASSWORD;
     private String CPASSWORD;
 }

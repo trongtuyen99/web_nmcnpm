@@ -15,7 +15,7 @@ public class EncryptedPasswordUtils {
 
     public static void main(String[] args) {
         // mã hóa thử
-        String password = "user";
+        String password = "admin";
         String encryptedPassword = encryptedPassword(password);
 
         System.out.println("Encrypted Password: " + encryptedPassword);
