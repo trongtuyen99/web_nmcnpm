@@ -2,6 +2,7 @@ package nhom8.shoppingweb.config;
 
 import javax.sql.DataSource;
 
+import  nhom8.shoppingweb.model.User;
 import nhom8.shoppingweb.model.MessageValidator;
 import nhom8.shoppingweb.model.UserValidator;
 import nhom8.shoppingweb.service.UserDetailsServiceImpl;
@@ -18,7 +19,7 @@ import org.springframework.security.web.authentication.rememberme.PersistentToke
 
 @Configuration
 @EnableWebSecurity
-public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
+public class MainConfig extends WebSecurityConfigurerAdapter {
     /*
         Cài đặt Spring Security để phân quyền khi đăng nhập.
     */

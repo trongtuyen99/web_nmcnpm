@@ -1,8 +1,8 @@
 <!DOCTYPE HTML>
-<!--@author Phong-->
 <html xmlns:th="http://www.thymeleaf.org">
     <head>
         <title>User Info</title>
+        <meta http-equiv ="Content-Type" content ="text/html; charset=UTF-8"/>
     </head>
     <body>
         <!-- Include _menu.html -->
@@ -16,6 +16,7 @@
     <br/><br/>
 
     <div th:if="${userInfo != null}" th:utext="${userInfo}"></div>
+
 
 </body>
 

@@ -25,9 +25,10 @@ public class MainController {
     private UserService userService;
     @Autowired
     private MessageService messageService;
+
     @GetMapping("/register.html")
-    public String addUser(Model modelu) {
-        modelu.addAttribute("user", new nhom8.shoppingweb.model.User());
+    public String addUser(Model model) {
+        model.addAttribute("user", new nhom8.shoppingweb.model.User());
         return "register";
     }
 
@@ -41,8 +42,8 @@ public class MainController {
                 .orElse("failed");
     }
     @GetMapping("/contact.html")
-    public String addMessage(Model modelm) {
-        modelm.addAttribute("msg", new Message());
+    public String addMessage(Model model) {
+        model.addAttribute("msg", new Message());
         return "contact";
     }
 
@@ -67,13 +68,14 @@ public class MainController {
     }
 
     @RequestMapping(value = "/admin", method = RequestMethod.GET)
-    public String adminPage(Model model, Principal principal) {
+    public String adminPage(Model model, Principal principal, @RequestParam(value = "limit", required = false) Integer limit) {
 
         User loginedUser = (User) ((Authentication) principal).getPrincipal();
 
         String userInfo = WebUtils.toString(loginedUser);
         model.addAttribute("userInfo", userInfo);
-
+        // Trả về đối tượng userList.
+        model.addAttribute("userList", userService.findAll(limit));
         return "adminPage";
     }
 
@@ -94,8 +96,8 @@ public class MainController {
         return "logoutSuccessfulPage";
     }
 
-    @RequestMapping(value = "/userInfo", method = RequestMethod.GET)
-    public String userInfo(Model model, Principal principal) {
+    @RequestMapping(value = {"/userInfo","/userAccountInfo"}, method = RequestMethod.GET)
+    public String userInfo(Model model, Principal principal, @RequestParam(value = "limit", required = false) Integer limit) {
 
         // Sau khi user login thành công, sẽ có principal
         String userName = principal.getName();
@@ -107,8 +109,10 @@ public class MainController {
         String userInfo = WebUtils.toString(loginedUser);
         model.addAttribute("userInfo", userInfo);
 
+
         return "userInfoPage";
     }
+
 
     @RequestMapping(value = "/403", method = RequestMethod.GET)
     public String accessDenied(Model model, Principal principal) {

@@ -12,6 +12,7 @@ public class EncryptedPasswordUtils {
         return encoder.encode(password);
     }
 
+
     public static void main(String[] args) {
         // mã hóa thử
         String password = "user";

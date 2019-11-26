@@ -8,11 +8,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
+import lombok.Data;
 
 @Entity(name = "NguoiDung")
 @Table(name = "NGUOIDUNG")
-// Nếu tên bảng ở database là NguoiDung thì trong này viết hoa hết như trên nha
-// Không là bị lỗi, còn lỗi gì ko biết
+@Data
 public class NguoiDung implements Serializable{
     /*
         Tạo ra 1 entity từ bảng NguoiDung trong database.
@@ -98,5 +98,4 @@ public class NguoiDung implements Serializable{
     public void setQuyenTruyCap(String quyenTruyCap) {
         this.quyenTruyCap = quyenTruyCap;
     }
-
 }
