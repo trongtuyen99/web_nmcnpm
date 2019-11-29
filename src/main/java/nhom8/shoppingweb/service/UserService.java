@@ -20,6 +20,7 @@ public class UserService {
     @Autowired
     private UserValidator uvalidator;
 
+
     /**
      * Lấy ra danh sách List<User>
      *
@@ -43,7 +44,7 @@ public class UserService {
         if (uvalidator.isValid(user)) {
             user.setPASSWORD(EncryptedPasswordUtils.encryptedPassword(user.getPASSWORD()));
             user.setCPASSWORD(EncryptedPasswordUtils.encryptedPassword(user.getCPASSWORD()));
-            user.setQUYENTRUYCAP("ROLE_USER ");
+            user.setROLE("ROLE_USER ");
             return userRepository.save(user);
         }
         return null;

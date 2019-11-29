@@ -15,7 +15,7 @@ public class User {
     private String PHONE;
     private String EMAIL;
     private String USERNAME;
-    private String QUYENTRUYCAP;
+    private String ROLE;
     private String PASSWORD;
     private String CPASSWORD;
 }

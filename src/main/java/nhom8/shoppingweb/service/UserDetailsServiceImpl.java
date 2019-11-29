@@ -34,11 +34,11 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         System.out.println("Found User: " + user);
 
         List<GrantedAuthority> grantList = new ArrayList<GrantedAuthority>();
-        GrantedAuthority auth = new SimpleGrantedAuthority(user.getQUYENTRUYCAP());
+        GrantedAuthority auth = new SimpleGrantedAuthority(user.getROLE());
         grantList.add(auth);
 
         // tạo một người dùng mới với tdn, mk và danh sách quyền truy cập.
-        UserDetails userDetails = (UserDetails) new User(user.getUSERNAME(), //
+        UserDetails userDetails = new User(user.getUSERNAME(), //
                 user.getPASSWORD(), grantList);
 
         return userDetails;

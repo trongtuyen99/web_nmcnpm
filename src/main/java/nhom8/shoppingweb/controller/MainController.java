@@ -4,17 +4,21 @@ import java.security.Principal;
 import java.util.Optional;
 
 import nhom8.shoppingweb.model.Message;
+import nhom8.shoppingweb.repository.UserDAO;
 import nhom8.shoppingweb.service.MessageService;
 import nhom8.shoppingweb.service.UserService;
 import nhom8.shoppingweb.utils.WebUtils;
+import nhom8.shoppingweb.service.UserDetailsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.management.modelmbean.ModelMBean;
+import javax.validation.constraints.Null;
 
 @Controller
 public class MainController {
@@ -25,6 +29,10 @@ public class MainController {
     private UserService userService;
     @Autowired
     private MessageService messageService;
+    @Autowired
+    private UserDetailsServiceImpl userDetailsService;
+    @Autowired
+    private UserDAO userDAO;
 
     @GetMapping("/register.html")
     public String addUser(Model model) {
@@ -78,6 +86,33 @@ public class MainController {
         model.addAttribute("userList", userService.findAll(limit));
         return "adminPage";
     }
+    @RequestMapping(value = {"/userInfo","/userAccountInfo"}, method = RequestMethod.GET)
+    public String userInfo(Model model, Principal principal) {
+
+        // Sau khi user login thành công, sẽ có principal
+        String userName = principal.getName();
+
+        System.out.println("User Name: " + userName);
+
+        User loginedUser = (User) ((Authentication) principal).getPrincipal();
+        String userInfo = WebUtils.toString(loginedUser);
+
+        nhom8.shoppingweb.model.User user = userDAO.findUser(userName);
+        String USERNAME = user.getUSERNAME();
+        String FULLNAME = user.getFULLNAME();
+        String PHONE = user.getPHONE();
+        String EMAIL = user.getEMAIL();
+        String ROLE = user.getROLE();
+
+        model.addAttribute("userInfo", userInfo);
+        model.addAttribute("USERNAME", USERNAME);
+        model.addAttribute("FULLNAME", FULLNAME);
+        model.addAttribute("PHONE", PHONE);
+        model.addAttribute("EMAIL", EMAIL);
+        model.addAttribute("ROLE", ROLE);
+        return "userInfoPage";
+    }
+
 
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public String login(Model model) {
@@ -95,24 +130,6 @@ public class MainController {
         model.addAttribute("title", "Logout");
         return "logoutSuccessfulPage";
     }
-
-    @RequestMapping(value = {"/userInfo","/userAccountInfo"}, method = RequestMethod.GET)
-    public String userInfo(Model model, Principal principal, @RequestParam(value = "limit", required = false) Integer limit) {
-
-        // Sau khi user login thành công, sẽ có principal
-        String userName = principal.getName();
-
-        System.out.println("User Name: " + userName);
-
-        User loginedUser = (User) ((Authentication) principal).getPrincipal();
-
-        String userInfo = WebUtils.toString(loginedUser);
-        model.addAttribute("userInfo", userInfo);
-
-
-        return "userInfoPage";
-    }
-
 
     @RequestMapping(value = "/403", method = RequestMethod.GET)
     public String accessDenied(Model model, Principal principal) {
@@ -145,11 +162,6 @@ public class MainController {
     @RequestMapping(value = "/single.html", method = RequestMethod.GET)
     public String single(Model model){
         return "single.html";
-    }
-
-    @RequestMapping(value = "/sample.html", method = RequestMethod.GET)
-    public String sample(Model model){
-        return "sample";
     }
 
 }

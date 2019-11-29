@@ -2,12 +2,10 @@
 <html xmlns:th="http://www.thymeleaf.org">
     <head>
         <title>User Info</title>
-        <meta http-equiv ="Content-Type" content ="text/html; charset=UTF-8"/>
     </head>
     <body>
         <!-- Include _menu.html -->
     <th:block th:include="/_menu"></th:block>
-
 
     <h2>User Info Page</h2>
     <h3>Welcome : <span th:utext="${#request.userPrincipal.name}"></span></h3>
@@ -16,8 +14,23 @@
     <br/><br/>
 
     <div th:if="${userInfo != null}" th:utext="${userInfo}"></div>
-
-
+    <h3>Thông tin User</h3>
+        <table border="1" style="width: auto">
+            <tr>
+                <th>Username</th>
+                <th>Fullname</th>
+                <th>Phone</th>
+                <th>Email</th>
+                <th>Role</th>
+            </tr>
+            <tr >
+                <td th:text="${USERNAME}"></td>
+                <td th:text="${FULLNAME}"></td>
+                <td th:text="${PHONE}"></td>
+                <td th:text="${EMAIL}"></td>
+                <td th:text="${ROLE}"></td>
+            </tr>
+        </table>
 </body>
 
 </html>
