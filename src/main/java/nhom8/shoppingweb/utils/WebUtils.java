@@ -1,22 +1,17 @@
 package nhom8.shoppingweb.utils;
 
-/**
- *
- * @author Phong
- */
 import java.util.Collection;
- 
+
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.User;
- 
+
 public class WebUtils {
- 
+
     // lấy tên user dưới kiểu String
     public static String toString(User user) {
         StringBuilder sb = new StringBuilder();
- 
+
         sb.append("UserName:").append(user.getUsername());
- 
         Collection<GrantedAuthority> authorities = user.getAuthorities();
         if (authorities != null && !authorities.isEmpty()) {
             sb.append(" (");
@@ -33,5 +28,4 @@ public class WebUtils {
         }
         return sb.toString();
     }
-     
 }

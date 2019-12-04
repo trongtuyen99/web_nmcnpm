@@ -1,5 +1,4 @@
 <!DOCTYPE HTML>
-<!--@author Phong-->
 <html xmlns:th="http://www.thymeleaf.org">
     <head>
         <title th:utext="${title}"></title>
@@ -17,6 +16,27 @@
     <br/><br/>
 
     <div th:if="${userInfo != null}" th:utext="${userInfo}"></div>
+        <h3>Danh sách User: </h3>
+
+            <!--Duyệt qua toàn bộ phần tử trong biến "userList"-->
+<!--            <li th:each="user : ${userList}">-->
+<!--                <span th:text="*{user.getUSERNAME()}"></span> | <span th:text="*{user.getPHONE()}"></span> | <span th:text="*{user.getEMAIL()}"></span> | <span th:text="*{user.getUSERNAME()}"></span>-->
+                <table border="1" style="width: auto">
+                    <tr>
+                        <th>Username</th>
+                        <th>Fullname</th>
+                        <th>Phone</th>
+                        <th>Email</th>
+                        <th>Role</th>
+                    </tr>
+                    <tr th:each="user : ${userList}">
+                        <td th:text="*{user.getUSERNAME()}"></td>
+                        <td th:text="*{user.getFULLNAME()}"></td>
+                        <td th:text="*{user.getPHONE()}"></td>
+                        <td th:text="*{user.getEMAIL()}"></td>
+                        <td th:text="*{user.getROLE()}"></td>
+                    </tr>
+                </table>
 
 </body>
 

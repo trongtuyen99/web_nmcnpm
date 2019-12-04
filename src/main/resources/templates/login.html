@@ -5,74 +5,73 @@ License: Creative Commons Attribution 3.0 Unported
 License URL: http://creativecommons.org/licenses/by/3.0/
 -->
 <!DOCTYPE html>
-<!--@author Phong-->
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
-    <head>
-        <meta charset="UTF-8"/>
-        <title>Login</title>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-        <link th:href="@{/css/bootstrap.css}" rel="stylesheet" type="text/css" media="all" />
-        <!--theme-style-->
-        <link th:href="@{/css/style.css}" rel="stylesheet" type="text/css" media="all" />	
-        <!--//theme-style-->
-        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-        <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
-        <!--fonts-->
-        <link th:href="@{http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800}" rel="stylesheet" type="text/css">
-        <!--//fonts-->
-        <script th:src="@{/js/jquery.min.js}"></script>
-    </head>
-    <body> 
-        <!-- chèn fragment header-->
-        <div th:replace="/fragments/header :: header"/>
-        
-        <div class="container">
-            <div class="account_grid">
-                <div class=" login-right">
-                    <h3>REGISTERED CUSTOMERS</h3>
-                    <p>If you have an account with us, please log in.</p>
-                    <!-- /login?error=true (lỗi khi login) -->
-                    <div th:if="${#request.getParameter('error') == 'true'}"
-                         style="color:red;margin:10px 0px;">
-                        Login Failed!!!<br />
-                        <span th:if="${#session!= null and #session.getAttribute('SPRING_SECURITY_LAST_EXCEPTION') != null}"
-                              th:utext="${#session.getAttribute('SPRING_SECURITY_LAST_EXCEPTION').message}">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Login</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link th:href="@{/css/bootstrap.css}" rel="stylesheet" type="text/css" media="all" />
+    <!--theme-style-->
+    <link th:href="@{/css/style.css}" rel="stylesheet" type="text/css" media="all" />
+    <!--//theme-style-->
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+    <!--fonts-->
+    <link th:href="@{http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800}" rel="stylesheet" type="text/css">
+    <!--//fonts-->
+    <script th:src="@{/js/jquery.min.js}"></script>
+</head>
+<body>
+<!-- chèn fragment header-->
+<div th:replace="/fragments/header :: header"/>
+
+<div class="container">
+    <div class="account_grid">
+        <div class=" login-right">
+            <h3>REGISTERED CUSTOMERS</h3>
+            <p>If you have an account with us, please log in.</p>
+            <!-- /login?error=true (lỗi khi login) -->
+            <div th:if="${#request.getParameter('error') == 'true'}"
+                 style="color:red;margin:10px 0px;">
+                Login Failed!!!<br />
+                <span th:if="${#session!= null and #session.getAttribute('SPRING_SECURITY_LAST_EXCEPTION') != null}"
+                      th:utext="${#session.getAttribute('SPRING_SECURITY_LAST_EXCEPTION').message}">
                             Static summary
                         </span>
 
-                    </div>
- 
-                    <form name='f' th:action="@{/j_spring_security_check}" method='POST'>
-                        <div>
-                            <span>Username</span>
-                            <input type="text" name="username" value="" maxlength="15" required> 
-                        </div>
-                        <div>
-                            <span>Password</span>
-                            <input type="password" name="password" value="" maxlength="15" required> 
-                        </div>
-                        <div>
-                            <span>Remember Me? <input type="checkbox" name="remember-me"> </span>
-                            
-                        </div>
-                        <input type="submit" value="Login">
-                        <a class="forgot" href="#">Forgot Your Password?</a>
-                    </form>
-                </div>	
-                <div class=" login-left">
-                    <h3>NEW CUSTOMERS</h3>
-                    <p>By creating an account with our store, you will be able to move through the checkout process faster, store multiple shipping addresses, view and track your orders in your account and more.</p>
-                    <a class="acount-btn" href="register.html">Create an Account</a>
-                </div>
-                <div class="clearfix"> </div>
             </div>
-            
-            <!-- chèn fragment sub-cate-->
-            <div th:replace="/fragments/sub-cate :: sub-cate"/>
-            
-            <div class="clearfix"> </div>
+
+            <form name='f' th:action="@{/j_spring_security_check}" method='POST'>
+                <div>
+                    <span>Username</span>
+                    <input type="text" name="username" value="" maxlength="15" required>
+                </div>
+                <div>
+                    <span>Password</span>
+                    <input type="password" name="password" value="" maxlength="15" required>
+                </div>
+                <div>
+                    <span>Remember Me? <input type="checkbox" name="remember-me"> </span>
+
+                </div>
+                <input type="submit" value="Login">
+                <a class="forgot" href="#">Forgot Your Password?</a>
+            </form>
         </div>
-        <!-- chèn fragment footer -->
-        <div th:replace="/fragments/footer :: footer"/>
-    </body>
+        <div class=" login-left">
+            <h3>NEW CUSTOMERS</h3>
+            <p>By creating an account with our store, you will be able to move through the checkout process faster, store multiple shipping addresses, view and track your orders in your account and more.</p>
+            <a class="acount-btn" href="register.html">Create an Account</a>
+        </div>
+        <div class="clearfix"> </div>
+    </div>
+
+    <!-- chèn fragment sub-cate-->
+    <div th:replace="/fragments/sub-cate :: sub-cate"/>
+
+    <div class="clearfix"> </div>
+</div>
+<!-- chèn fragment footer -->
+<div th:replace="/fragments/footer :: footer"/>
+</body>
 </html>
