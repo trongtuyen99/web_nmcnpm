@@ -122,7 +122,7 @@ public class MainConfig extends WebSecurityConfigurerAdapter {
     }
     public class ProductConfig {
         /**
-         * Tạo ra Bean MessageValidator để sử dụng sau này
+         * Tạo ra Bean ProductValidator để sử dụng sau này
          * @return
          */
         @Bean

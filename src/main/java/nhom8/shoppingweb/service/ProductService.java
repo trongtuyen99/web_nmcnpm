@@ -3,7 +3,6 @@ package nhom8.shoppingweb.service;
 import nhom8.shoppingweb.model.Product;
 import nhom8.shoppingweb.model.ProductValidator;
 import nhom8.shoppingweb.repository.ProductRepository;
-import nhom8.shoppingweb.utils.EncryptedPasswordUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;

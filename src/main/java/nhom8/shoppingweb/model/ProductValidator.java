@@ -1,16 +1,9 @@
 package nhom8.shoppingweb.model;
 
-import nhom8.shoppingweb.repository.UserDAO;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.thymeleaf.util.StringUtils;
 
 import java.util.Optional;
-import nhom8.shoppingweb.model.User;
-import nhom8.shoppingweb.repository.UserDAO;
 
-/*
-Đối tượng này dùng để kiểm tra xem một Object User có hợp lệ không
- */
 public class ProductValidator {
     public boolean isValid(Product product) {
         return Optional.ofNullable(product)
