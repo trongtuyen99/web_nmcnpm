@@ -9,7 +9,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
     <head>
         <meta charset="UTF-8"/>
-        <title>Login</title>
+        <title>Admin Page</title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
         <link th:href="@{/css/bootstrap.css}" rel="stylesheet" type="text/css" media="all" />
         <!--theme-style-->
@@ -27,8 +27,27 @@ License URL: http://creativecommons.org/licenses/by/3.0/
         <div th:replace="/fragments/header :: header"/>
         
         <div class="container">
-            <!-- your code goes here -->
-            
+            <div class=" single_top">
+                <h1>ADMIN CONTROL PAGE</h1>
+                <br>
+                <h2>PRODUCTS</h2>
+                <a href="addProduct.html"><span class="on-get">ADD A NEW PRODUCT</span></a>
+                <a href="#"><span class="on-get">BLAH</span></a>
+
+                <h2>USERS</h2>
+                <a href="#"><span class="on-get">BLAH</span></a>
+                <a href="#"><span class="on-get">BLAH</span></a>
+
+                <h2>FEEDBACKS</h2>
+                <a href="#"><span class="on-get">BLAH</span></a>
+                <a href="#"><span class="on-get">BLAH</span></a>
+
+                <h2>ORDERS</h2>
+                <a href="#"><span class="on-get">BLAH</span></a>
+                <a href="#"><span class="on-get">BLAH</span></a>
+                <div class="clearfix"> </div>
+            </div>
+
             <!-- chèn fragment sub-cate -->
             <div th:replace="/fragments/sub-cate :: sub-cate"/>
             <div class="clearfix"> </div>

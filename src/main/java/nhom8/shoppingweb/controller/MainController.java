@@ -6,6 +6,7 @@ import java.util.Optional;
 import nhom8.shoppingweb.model.Message;
 import nhom8.shoppingweb.repository.UserDAO;
 import nhom8.shoppingweb.service.MessageService;
+import nhom8.shoppingweb.service.ProductService;
 import nhom8.shoppingweb.service.UserService;
 import nhom8.shoppingweb.utils.WebUtils;
 import nhom8.shoppingweb.service.UserDetailsServiceImpl;
@@ -30,6 +31,8 @@ public class MainController {
     @Autowired
     private MessageService messageService;
     @Autowired
+    private ProductService productService;
+    @Autowired
     private UserDetailsServiceImpl userDetailsService;
     @Autowired
     private UserDAO userDAO;
@@ -46,9 +49,26 @@ public class MainController {
     @PostMapping("/register.html")
     public String addUser(@ModelAttribute nhom8.shoppingweb.model.User user) {
         return Optional.ofNullable(userService.add(user))
-                .map(t -> "success")
-                .orElse("failed");
+                .map(t -> "fragments/rsuccess")
+                .orElse("fragments/failed");
     }
+
+    @GetMapping("/addProduct.html")
+    public String addProduct(Model model) {
+        model.addAttribute("product", new nhom8.shoppingweb.model.Product());
+        return "addProduct";
+    }
+
+    /*
+    @ModelAttribute đánh dấu đối tượng User được gửi lên bởi Form Request
+     */
+    @PostMapping("/addProduct.html")
+    public String addProduct(@ModelAttribute nhom8.shoppingweb.model.Product product) {
+        return Optional.ofNullable(productService.add(product))
+                .map(t -> "fragments/psuccess")
+                .orElse("fragments/pfailed");
+    }
+
     @GetMapping("/contact.html")
     public String addMessage(Model model) {
         model.addAttribute("msg", new Message());
@@ -61,8 +81,13 @@ public class MainController {
     @PostMapping("/contact.html")
     public String addMessage(@ModelAttribute Message msg) {
         return Optional.ofNullable(messageService.add(msg))
-                .map(t -> "msuccess")
-                .orElse("mfailed");
+                .map(t -> "fragments/msuccess")
+                .orElse("fragments/mfailed");
+    }
+
+    @RequestMapping(value = "/adminControlPanel.html", method = RequestMethod.GET)
+    public String adminControlPanel(Model model){
+        return "adminControlPanel";
     }
 
     @RequestMapping(value = { "/", "/welcome" }, method = RequestMethod.GET)
@@ -110,12 +135,6 @@ public class MainController {
         return "userInfoPage";
     }
 
-
-    @RequestMapping(value = "/login", method = RequestMethod.GET)
-    public String login(Model model) {
-
-        return "login";
-    }
     @RequestMapping(value = "/login.html", method = RequestMethod.GET)
     public String loginhtml(Model model) {
 

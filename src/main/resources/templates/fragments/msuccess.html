@@ -5,11 +5,10 @@ License: Creative Commons Attribution 3.0 Unported
 License URL: http://creativecommons.org/licenses/by/3.0/
 -->
 <!DOCTYPE html>
-<!-- template mẫu cho mọi trang html -->
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
     <head>
         <meta charset="UTF-8"/>
-        <title>Login</title>
+        <title>Success</title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
         <link th:href="@{/css/bootstrap.css}" rel="stylesheet" type="text/css" media="all" />
         <!--theme-style-->
@@ -28,9 +27,12 @@ License URL: http://creativecommons.org/licenses/by/3.0/
         
         <div class="container">
             <!-- your code goes here -->
-            
+            <div class="register">
+                <h1 style="color: limegreen">Gửi phản hồi thành công</h1>
+            </div>
             <!-- chèn fragment sub-cate -->
             <div th:replace="/fragments/sub-cate :: sub-cate"/>
+
             <div class="clearfix"> </div>
         </div>
         <!-- chèn fragment footer -->

@@ -2,6 +2,7 @@ package nhom8.shoppingweb.config;
 
 import javax.sql.DataSource;
 
+import nhom8.shoppingweb.model.ProductValidator;
 import  nhom8.shoppingweb.model.User;
 import nhom8.shoppingweb.model.MessageValidator;
 import nhom8.shoppingweb.model.UserValidator;
@@ -51,7 +52,7 @@ public class MainConfig extends WebSecurityConfigurerAdapter {
         // Các trang không yêu cầu login, không yêu cầu role nào
         http.authorizeRequests().antMatchers("/", "/logout").permitAll();
         // Các trang chỉ truy cập được khi là khách
-        http.authorizeRequests().antMatchers("/login").access("isAnonymous()");
+        http.authorizeRequests().antMatchers("/login.html").access("isAnonymous()");
         // Các trang yêu cầu phải login với vai trò ROLE_USER hoặc ROLE_ADMIN.
         // Nếu chưa login, nó sẽ redirect tới trang /login.
         // lưu ý tên role là 'ROLE_USER ' (10 ký tự) chứ không phải 'ROLE_USER' (9 ký tự)
@@ -59,7 +60,15 @@ public class MainConfig extends WebSecurityConfigurerAdapter {
         http.authorizeRequests().antMatchers("/userInfo").access("hasAnyRole('ROLE_USER ', 'ROLE_ADMIN')");
 
         // Các trang yêu cầu phải login với vai trò ROLE_ADMIN
-        http.authorizeRequests().antMatchers("/admin").access("hasRole('ROLE_ADMIN')");
+        http.authorizeRequests().antMatchers(
+                "/admin", "/adminControlPanel.html",
+                "addProduct.html"
+        ).access("hasRole('ROLE_ADMIN')");
+
+        // Các trang yêu cầu phải login với vai trò ROLE_USER
+        http.authorizeRequests().antMatchers(
+                "/contact.html"
+        ).access("hasRole('ROLE_USER ')");
 
         // Khi người dùng đã login, với vai trò XX.
         // Nhưng truy cập vào trang yêu cầu vai trò YY,
@@ -109,6 +118,16 @@ public class MainConfig extends WebSecurityConfigurerAdapter {
         @Bean
         public MessageValidator mvalidator() {
             return new MessageValidator();
+        }
+    }
+    public class ProductConfig {
+        /**
+         * Tạo ra Bean MessageValidator để sử dụng sau này
+         * @return
+         */
+        @Bean
+        public ProductValidator pvalidator() {
+            return new ProductValidator();
         }
     }
 }

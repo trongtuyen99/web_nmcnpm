@@ -10,7 +10,7 @@ import lombok.Data;
 public class Message {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long ID;
+    private int ID;
     private String NAME;
     private String EMAIL;
     private String MESSAGE;
