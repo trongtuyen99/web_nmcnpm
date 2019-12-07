@@ -29,11 +29,11 @@
             		<div class="contact-form">
 							<form th:action="@{/contact.html}" th:object="${msg}" method="post">
 <!--								<span>Name<label>*</label></span>-->
-								<input type="text" placeholder="Name" th:field="*{NAME} ">
+								<input type="text" placeholder="Name" th:field="*{NAME}" required=" ">
 <!--								<span>Email<label>*</label></span>-->
-								<input type="text" placeholder="Email" th:field="*{EMAIL}">
+								<input type="text" placeholder="Email" th:field="*{EMAIL}" required=" ">
 <!--								<span>Message<label>*</label></span>-->
-								<textarea value="Message" placeholder="Message" th:field="*{MESSAGE} ">Message</textarea>
+								<textarea value="Message" placeholder="Message" th:field="*{MESSAGE}" required=" ">Message</textarea>
 								<input type="submit" value="Send">
 								<div class="clearfix"> </div>
 							</form>

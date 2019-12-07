@@ -4,7 +4,7 @@ import java.security.Principal;
 import java.util.Optional;
 
 import nhom8.shoppingweb.model.Message;
-import nhom8.shoppingweb.repository.UserDAO;
+import nhom8.shoppingweb.repository.UserRepository;
 import nhom8.shoppingweb.service.MessageService;
 import nhom8.shoppingweb.service.UserService;
 import nhom8.shoppingweb.utils.WebUtils;
@@ -12,13 +12,10 @@ import nhom8.shoppingweb.service.UserDetailsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import javax.management.modelmbean.ModelMBean;
-import javax.validation.constraints.Null;
 
 @Controller
 public class MainController {
@@ -30,9 +27,7 @@ public class MainController {
     @Autowired
     private MessageService messageService;
     @Autowired
-    private UserDetailsServiceImpl userDetailsService;
-    @Autowired
-    private UserDAO userDAO;
+    private UserRepository userRepository;
 
     @GetMapping("/register.html")
     public String addUser(Model model) {
@@ -97,7 +92,7 @@ public class MainController {
         User loginedUser = (User) ((Authentication) principal).getPrincipal();
         String userInfo = WebUtils.toString(loginedUser);
 
-        nhom8.shoppingweb.model.User user = userDAO.findUser(userName);
+        nhom8.shoppingweb.model.User user = userRepository.findByUSERNAME(userName);
         String USERNAME = user.getUSERNAME();
         String FULLNAME = user.getFULLNAME();
         String PHONE = user.getPHONE();

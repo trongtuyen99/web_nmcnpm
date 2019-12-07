@@ -1,8 +1,5 @@
 package nhom8.shoppingweb.config;
 
-import javax.sql.DataSource;
-
-import  nhom8.shoppingweb.model.User;
 import nhom8.shoppingweb.model.MessageValidator;
 import nhom8.shoppingweb.model.UserValidator;
 import nhom8.shoppingweb.service.UserDetailsServiceImpl;
@@ -26,9 +23,6 @@ public class MainConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private UserDetailsServiceImpl userDetailsService;
 
-    @Autowired
-    private DataSource dataSource;
-
     @Bean
     public BCryptPasswordEncoder passwordEncoder() {
         BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
@@ -51,7 +45,7 @@ public class MainConfig extends WebSecurityConfigurerAdapter {
         // Các trang không yêu cầu login, không yêu cầu role nào
         http.authorizeRequests().antMatchers("/", "/logout").permitAll();
         // Các trang chỉ truy cập được khi là khách
-        http.authorizeRequests().antMatchers("/login").access("isAnonymous()");
+        http.authorizeRequests().antMatchers("/login.html").access("isAnonymous()");
         // Các trang yêu cầu phải login với vai trò ROLE_USER hoặc ROLE_ADMIN.
         // Nếu chưa login, nó sẽ redirect tới trang /login.
         // lưu ý tên role là 'ROLE_USER ' (10 ký tự) chứ không phải 'ROLE_USER' (9 ký tự)
@@ -79,9 +73,9 @@ public class MainConfig extends WebSecurityConfigurerAdapter {
                 .and().logout().logoutUrl("/logout").logoutSuccessUrl("/logoutSuccessful");
 
         // Cấu hình Remember Me.
-        http.authorizeRequests().and()
-                .rememberMe().tokenRepository(this.persistentTokenRepository())
-                .tokenValiditySeconds(86400); // = 24h
+//        http.authorizeRequests().and()
+//                .rememberMe().tokenRepository(this.persistentTokenRepository())
+//                .tokenValiditySeconds(86400); // = 24h
 
     }
 

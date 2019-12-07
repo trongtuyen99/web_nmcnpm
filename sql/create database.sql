@@ -1,4 +1,4 @@
-CREATE DATABASE WebDongHoDB
+CREATE DATABASE TEST
 GO
 USE [WebDongHoDB]
 GO
@@ -31,17 +31,17 @@ SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE TABLE [dbo].[userdb](
-	[ID] [int] IDENTITY(1,1) NOT NULL,
-	[USERNAME] [varchar](15) NOT NULL,
-	[PASSWORD] [char](60) NOT NULL,
-	[FULLNAME] [nvarchar](50) NOT NULL,
-	[PHONE] [varchar](15) NOT NULL,
-	[EMAIL] [varchar](50) NOT NULL,
+CREATE TABLE [dbo].[NguoiDung](
+	[maND] [int] IDENTITY(1,1) NOT NULL,
+	[tenDangNhap] [varchar](15) NOT NULL,
+	[matKhau] [char](60) NOT NULL,
+	[hoTen] [nvarchar](50) NOT NULL,
+	[sdt] [varchar](15) NOT NULL,
+	[email] [varchar](50) NOT NULL,
 	[quyenTruyCap] [char](10) NOT NULL,
  CONSTRAINT [PK_nguoidung] PRIMARY KEY CLUSTERED 
 (
-	[ID] ASC
+	[maND] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
@@ -139,15 +139,7 @@ GO
 
 
 /* INSERT table NguoiDung */
---INSERT [dbo].[NguoiDung] ([tenDangNhap], [matKhau], [hoTen], [sdt], [email], [quyenTruyCap]) VALUES (N'admin1', N'$2a$10$ftsOC6mTM916hBIRdbtRHOa88WdjQxqhhpYX55GJTY3oJUEMjAfAW', N'Admin 1', N'091234567', N'admin1@mail.com', N'ROLE_ADMIN')
---INSERT [dbo].[NguoiDung] ([tenDangNhap], [matKhau], [hoTen], [sdt], [email], [quyenTruyCap]) VALUES (N'admin2', N'$2a$10$ftsOC6mTM916hBIRdbtRHOa88WdjQxqhhpYX55GJTY3oJUEMjAfAW', N'Admin 2', N'091765432', N'admin2@mail.com', N'ROLE_ADMIN')
---INSERT [dbo].[NguoiDung] ([tenDangNhap], [matKhau], [hoTen], [sdt], [email], [quyenTruyCap]) VALUES (N'user1', N'$2a$10$b/OuRTh/omtLXWWInfm.KOwTEJA2qQkN3/ShsJ6Z.vu.RrZhxVv76', N'User 1', N'097654321', N'user1@mail.com', N'ROLE_USER ')
---INSERT [dbo].[NguoiDung] ([tenDangNhap], [matKhau], [hoTen], [sdt], [email], [quyenTruyCap]) VALUES (N'user2', N'$2a$10$b/OuRTh/omtLXWWInfm.KOwTEJA2qQkN3/ShsJ6Z.vu.RrZhxVv76', N'User 2 ', N'097123456', N'user2@mail.com', N'ROLE_USER ')
-
-
-CREATE TABLE contactdb(
-	ID INT IDENTITY(1,1) PRIMARY KEY,
-	NAME NVARCHAR(20),
-	EMAIL NVARCHAR(20),
-	MESSAGE NTEXT
-)
+INSERT [dbo].[NguoiDung] ([tenDangNhap], [matKhau], [hoTen], [sdt], [email], [quyenTruyCap]) VALUES (N'admin1', N'$2a$10$ftsOC6mTM916hBIRdbtRHOa88WdjQxqhhpYX55GJTY3oJUEMjAfAW', N'Admin 1', N'091234567', N'admin1@mail.com', N'ROLE_ADMIN')
+INSERT [dbo].[NguoiDung] ([tenDangNhap], [matKhau], [hoTen], [sdt], [email], [quyenTruyCap]) VALUES (N'admin2', N'$2a$10$ftsOC6mTM916hBIRdbtRHOa88WdjQxqhhpYX55GJTY3oJUEMjAfAW', N'Admin 2', N'091765432', N'admin2@mail.com', N'ROLE_ADMIN')
+INSERT [dbo].[NguoiDung] ([tenDangNhap], [matKhau], [hoTen], [sdt], [email], [quyenTruyCap]) VALUES (N'user1', N'$2a$10$b/OuRTh/omtLXWWInfm.KOwTEJA2qQkN3/ShsJ6Z.vu.RrZhxVv76', N'User 1', N'097654321', N'user1@mail.com', N'ROLE_USER ')
+INSERT [dbo].[NguoiDung] ([tenDangNhap], [matKhau], [hoTen], [sdt], [email], [quyenTruyCap]) VALUES (N'user2', N'$2a$10$b/OuRTh/omtLXWWInfm.KOwTEJA2qQkN3/ShsJ6Z.vu.RrZhxVv76', N'User 2 ', N'097123456', N'user2@mail.com', N'ROLE_USER ')
