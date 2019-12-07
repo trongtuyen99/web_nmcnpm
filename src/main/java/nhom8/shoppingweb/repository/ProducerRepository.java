@@ -8,7 +8,5 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface ProductRepository extends JpaRepository<Product, Integer> {
-    @Query("SELECT e FROM productdb e")
-    Page<Product> findAllProducts(Pageable pageable);
+public interface ProducerRepository extends JpaRepository<Product, Integer> {
 }

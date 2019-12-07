@@ -43,4 +43,16 @@ public class ProductService {
         }
         return null;
     }
+
+    public Product update(Product product) {
+        if (pvalidator.isValid(product)) {
+            return productRepository.save(product);
+        }
+        return null;
+    }
+
+
+    public Optional<Product> findById(int id){
+        return productRepository.findById(id);
+    }
 }

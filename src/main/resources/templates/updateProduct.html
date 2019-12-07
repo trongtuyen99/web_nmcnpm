@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8"/>
-    <title>Add Product</title>
+    <title>Update Product</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <link th:href="@{/css/bootstrap.css}" rel="stylesheet" type="text/css" media="all"/>
     <!--theme-style-->
@@ -29,9 +29,9 @@
 <div class="container">
 
     <div class="register">
-        <form th:action="@{/addProduct}" th:object="${product}" method="post">
+        <form th:action="@{/updateProduct}" th:object="${product}" method="post">
 			<div class="  register-top-grid">
-				<h3>NEW PRODUCT INFORMATION</h3>
+				<h3>UPDATE PRODUCT INFORMATION</h3>
 				<div class="mation">
 					<span>NAME<label>*</label></span>
 					<input type="text" th:field="*{NAME}">
