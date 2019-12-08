@@ -9,7 +9,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8"/>
-    <title>View Product</title>
+    <title>View Order</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <link th:href="@{/css/bootstrap.css}" rel="stylesheet" type="text/css" media="all"/>
     <link th:href="@{/css/style.css}" rel="stylesheet" type="text/css" media="all"/>
@@ -52,25 +52,30 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 <div class="container">
     <div class=" single_top">
         <div class="single_grid">
-            <div class="grid images_3_of_2">
-                <img th:src="@{${product.IMAGE}}" alt="File not found" width="302" height="402"/>
-                <div class="clearfix"> </div>
-            </div>
             <div class="desc1 span_3_of_2">
-                <h4><span th:text="${product.NAME}"></span></h4>
+                <h4>Order ID: <span th:text="${order.ID}"></span></h4>
                 <div class="cart-b">
-                    <div class="left-n "><span th:text="${product.PRICE}"></span> VND</div>
-                    <a class="now-get get-cart-in" th:href="@{/addToCart/} + ${product.ID}">ADD TO CART</a>
+                    <div class="left-n ">Time created: <span th:text="${order.CREATED_TIME}"></span></div>
                     <div class="clearfix"></div>
                 </div>
-                <h6><span th:text="${product.STOCK_NUMBER}"></span> items in stock</h6>
-                <p><span th:text="${product.PRODUCER_ID}"></span></p>
+                <div class="cart-b">
+                    <div class="left-n ">Shipping address: <span th:text="${order.ADDRESS}"></span></div>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="cart-b">
+                    <div class="left-n ">Price: <span th:text="${order.PRICE}"></span></div>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="cart-b">
+                    <div class="left-n ">Quantity: <span th:text="${order.QUANTITY}"></span></div>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="cart-b">
+                    <input type="button" value="Go back" onclick = "window.history.back()"/>
+                    <div class="clearfix"></div>
+                </div>
             </div>
             <div class="clearfix"></div>
-        </div>
-        <div class="toogle">
-            <h3 class="m_3">Product Details</h3>
-            <p class="m_text"><span th:text="${product.DESCRIPTION}"></span></p>
         </div>
     </div>
     <!-- chèn fragment sub-cate -->

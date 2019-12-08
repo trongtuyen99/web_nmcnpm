@@ -3,7 +3,7 @@ package nhom8.shoppingweb.repository;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.Query;
-import nhom8.shoppingweb.model.User;
+import nhom8.shoppingweb.entity.User;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;

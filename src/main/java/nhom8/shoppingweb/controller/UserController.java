@@ -24,7 +24,7 @@ public class UserController {
 
     @GetMapping("/register")
     public String addUser(Model model) {
-        model.addAttribute("user", new nhom8.shoppingweb.model.User());
+        model.addAttribute("user", new nhom8.shoppingweb.entity.User());
         return "register";
     }
 
@@ -32,9 +32,9 @@ public class UserController {
     @ModelAttribute đánh dấu đối tượng User được gửi lên bởi Form Request
      */
     @PostMapping("/register")
-    public String addUser(@ModelAttribute nhom8.shoppingweb.model.User user) {
+    public String addUser(@ModelAttribute nhom8.shoppingweb.entity.User user) {
         return Optional.ofNullable(userService.add(user))
-                .map(t -> "fragments/rsuccess")
+                .map(t -> "fragments/success")
                 .orElse("fragments/failed");
     }
 
@@ -48,7 +48,7 @@ public class UserController {
         User loginedUser = (User) ((Authentication) principal).getPrincipal();
         String userInfo = WebUtils.toString(loginedUser);
 
-        nhom8.shoppingweb.model.User user = userDAO.findUser(userName);
+        nhom8.shoppingweb.entity.User user = userDAO.findUser(userName);
         String USERNAME = user.getUSERNAME();
         String FULLNAME = user.getFULLNAME();
         String PHONE = user.getPHONE();

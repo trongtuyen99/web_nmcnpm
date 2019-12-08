@@ -7,57 +7,19 @@
         <!-- khai báo fragment nhớ thêm tên class cũ để nhận được css property ứng với class đó. -->
         <div th:fragment="sub-cate" class="sub-cate">
             <div class=" top-nav rsidebar span_1_of_left">
-                <h3 class="cate">CATEGORIES</h3>
+                <h3 class="cate">MENU</h3>
                 <ul class="menu">
-                    <li class="item1"><a href="#">Curabitur sapien<img class="arrow-img" th:src="@{/images/arrow1.png}" alt=""/> </a>
-                        <ul class="cute">
-                            <li class="subitem1"><a href="product.html">Cute Kittens </a></li>
-                            <li class="subitem2"><a href="product.html">Strange Stuff </a></li>
-                            <li class="subitem3"><a href="product.html">Automatic Fails </a></li>
-                        </ul>
-                    </li>
-                    <li class="item2"><a href="#">Dignissim purus <img class="arrow-img " th:src="@{/images/arrow1.png}" alt=""/></a>
-                        <ul class="cute">
-                            <li class="subitem1"><a href="product.html">Cute Kittens </a></li>
-                            <li class="subitem2"><a href="product.html">Strange Stuff </a></li>
-                            <li class="subitem3"><a href="product.html">Automatic Fails </a></li>
-                        </ul>
-                    </li>
-                    <li class="item3"><a href="#">Ultrices id du<img class="arrow-img img-arrow" th:src="@{/images/arrow1.png}" alt=""/> </a>
-                        <ul class="cute">
-                            <li class="subitem1"><a href="product.html">Cute Kittens </a></li>
-                            <li class="subitem2"><a href="product.html">Strange Stuff </a></li>
-                            <li class="subitem3"><a href="product.html">Automatic Fails</a></li>
-                        </ul>
-                    </li>
-                    <li class="item4"><a href="#">Cras iacaus rhone <img class="arrow-img img-left-arrow" th:src="@{/images/arrow1.png}" alt=""/></a>
-                        <ul class="cute">
-                            <li class="subitem1"><a href="product.html">Cute Kittens </a></li>
-                            <li class="subitem2"><a href="product.html">Strange Stuff </a></li>
-                            <li class="subitem3"><a href="product.html">Automatic Fails </a></li>
-                        </ul>
-                    </li>
-                    <li>
-                        <ul class="kid-menu">
-                            <li><a href="product.html">Tempus pretium</a></li>
-                            <li ><a href="product.html">Dignissim neque</a></li>
-                            <li ><a href="product.html">Ornared id aliquet</a></li>
-                        </ul>
-                    </li>
                     <ul class="kid-menu ">
-                        <li><a href="product.html">Commodo sit</a></li>
-                        <li ><a href="product.html">Urna ac tortor sc</a></li>
-                        <li><a href="product.html">Ornared id aliquet</a></li>
-                        <li><a href="product.html">Urna ac tortor sc</a></li>
-                        <li ><a href="product.html">Eget nisi laoreet</a></li>
-                        <li><a href="product.html">Faciisis ornare</a></li>
-                        <li th:if="${#request.isUserInRole('USER ')}" class="menu-kid-left"><a th:href="@{/contact}">Contact us</a></li>
-                        <li th:if="${#request.isUserInRole('ADMIN')}" class="menu-kid-left"><a th:href="@{/adminControlPanel}">Admin Control Panel</a></li>            
+                        <li th:if="${!#request.isUserInRole('ADMIN')}"><a th:href="@{/listProduct}">View All Products</a></li>
+                        <li th:if="${!#request.isUserInRole('ADMIN')}"><a th:href="@{/listProducer}">Search Products By Producer</a></li>
+                        <li th:if="${#request.isUserInRole('ADMIN')}"><a th:href="@{/adminControlPanel}">Admin Control Panel</a></li>
+                        <li th:if="${!#request.isUserInRole('ADMIN')}"><a th:href="@{/cart}">Cart</a></li>
+                        <li th:if="${!#request.isUserInRole('ADMIN')}"><a th:href="@{/contact}">Contact us</a></li>    
+                        <li th:if="${#request.isUserInRole('USER ') || #request.isUserInRole('ADMIN')}"><a th:href="@{/logout}">Logout</a></li>
                     </ul>
                 </ul>
             </div>
-            <!--initiate accordion-->
-            <script type="text/javascript" th:inline="javascript">
+<!--            <script type="text/javascript" th:inline="javascript">
                 $(function () {
                     var menu_ul = $('.menu > li > ul'),
                             menu_a = $('.menu > li > a');
@@ -73,10 +35,8 @@
                             $(this).next().stop(true, true).slideUp('normal');
                         }
                     });
-
                 });
-            </script>
-            <a class="view-all all-product" href="product.html">VIEW ALL PRODUCTS<span> </span></a> 	
+            </script>-->
         </div>
     </body>
 </html>

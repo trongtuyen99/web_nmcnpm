@@ -1,7 +1,7 @@
 package nhom8.shoppingweb.service;
 
-import nhom8.shoppingweb.model.User;
-import nhom8.shoppingweb.model.UserValidator;
+import nhom8.shoppingweb.entity.User;
+import nhom8.shoppingweb.entity.UserValidator;
 import nhom8.shoppingweb.repository.UserRepository;
 import nhom8.shoppingweb.utils.EncryptedPasswordUtils;
 import org.springframework.beans.factory.annotation.Autowired;

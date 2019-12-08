@@ -24,7 +24,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {
-        nhom8.shoppingweb.model.User user = this.userDAO.findUser(userName);
+        nhom8.shoppingweb.entity.User user = this.userDAO.findUser(userName);
 
         if (user == null) {
             System.out.println("User not found! " + userName);

@@ -9,7 +9,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
     <head>
         <meta charset="UTF-8"/>
-        <title>List Product</title>
+        <title>Search Result</title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
         <link th:href="@{/css/bootstrap.css}" rel="stylesheet" type="text/css" media="all" />
         <!--theme-style-->
@@ -60,8 +60,8 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                     </th:block>
                 </table>
                 <p></p>
-                <a th:if="${currentPage > 0}" th:href="@{/listProduct(page=${currentPage-1})}"><span class="on-get">Previous page</span></a>
-                <a th:if="${currentPage < numberOfPages - 1}" th:href="@{/listProduct(page=${currentPage+1})}"><span class="on-get">Next page</span></a>
+                <a th:if="${currentPage > 0}" th:href="@{/listProductByProducerID(page=${currentPage-1}, producerID=${producerID})}"><span class="on-get">Previous page</span></a>
+                <a th:if="${currentPage < numberOfPages - 1}" th:href="@{/listProductByProducerID(page=${currentPage+1}, producerID=${producerID})}"><span class="on-get">Next page</span></a>
                 <div class="clearfix"> </div>
             </div>
 

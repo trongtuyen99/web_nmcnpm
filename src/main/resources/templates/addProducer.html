@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8"/>
-    <title>Add Product</title>
+    <title>Add Producer</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <link th:href="@{/css/bootstrap.css}" rel="stylesheet" type="text/css" media="all"/>
     <!--theme-style-->
@@ -29,27 +29,15 @@
 <div class="container">
 
     <div class="register">
-        <form th:action="@{/addProduct}" th:object="${product}" method="post">
+        <form th:action="@{/addProducer}" th:object="${producer}" method="post">
 			<div class="  register-top-grid">
-				<h3>NEW PRODUCT INFORMATION</h3>
+				<h3>NEW PRODUCER INFORMATION</h3>
 				<div class="mation">
 					<span>NAME<label>*</label></span>
 					<input type="text" th:field="*{NAME}">
 
-					<span>PRICE<label>*</label></span>
-					<input type="text" th:field="*{PRICE}">
-
-                                        <span>PRODUCER ID<label>*</label><span><a th:href="@{/listProducer}">(Find producer ID here)</a></span></span>
-					<input type="text" th:field="*{PRODUCER_ID}">
-
-					<span>STOCK NUMBER<label>*</label></span>
-					<input type="text" th:field="*{STOCK_NUMBER}">
-
-					<span>DESCRIPTION</span>
-					<input type="text" th:field="*{DESCRIPTION}">
-
-					<span>IMAGE ADDRESS</span>
-					<input type="text" th:field="*{IMAGE}">
+					<span>WEBSITE<label>*</label></span>
+					<input type="text" th:field="*{WEBSITE}">
 				</div>
 				<div class="clearfix"></div>
 			</div>

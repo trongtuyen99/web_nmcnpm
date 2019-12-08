@@ -5,10 +5,11 @@ License: Creative Commons Attribution 3.0 Unported
 License URL: http://creativecommons.org/licenses/by/3.0/
 -->
 <!DOCTYPE html>
+<!-- template mẫu cho mọi trang html -->
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
     <head>
         <meta charset="UTF-8"/>
-        <title>Failed</title>
+        <title>Cart</title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
         <link th:href="@{/css/bootstrap.css}" rel="stylesheet" type="text/css" media="all" />
         <!--theme-style-->
@@ -20,20 +21,42 @@ License URL: http://creativecommons.org/licenses/by/3.0/
         <link th:href="@{http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800}" rel="stylesheet" type="text/css">
         <!--//fonts-->
         <script th:src="@{/js/jquery.min.js}"></script>
+        <style>
+            table, th, td, tr {
+                border: 1px solid black;
+            }
+            td {
+                padding-right: 30px;
+            }
+        </style>
     </head>
     <body> 
         <!-- chèn fragment header-->
         <div th:replace="/fragments/header :: header"/>
         
         <div class="container">
-            <!-- your code goes here -->
-            <div class="register">
-                <h1 style="color: red">Gửi phản hồi thất bại, hãy điền đủ các mục</h1>
+            <div class=" single_top">
+                <table>
+                    <tr>
+                        <th>Product ID</th>
+                        <th>Quantity</th>
+                        <th>Delete</th>
+                        <th>Buy</th>
+                    </tr>
+                    <th:block th:each="entry : ${listItems}">
+                        <tr>
+                            <td><a th:text="${entry.key}"></a></td>
+                            <td><a th:text="${entry.value}"></a></td>
+                            <td><a th:href="@{/deleteItem/} + ${entry.key}">Delete</a></td>
+                            <td><a th:href="@{/buy(id=${entry.key}, quantity=${entry.value})}">Buy</a></td>
+                        </tr>
+                    </th:block>
+                </table>
+                <div class="clearfix"> </div>
             </div>
-<!--            <div class="clearfix"> </div>-->
+
             <!-- chèn fragment sub-cate -->
             <div th:replace="/fragments/sub-cate :: sub-cate"/>
-            
             <div class="clearfix"> </div>
         </div>
         <!-- chèn fragment footer -->

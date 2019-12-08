@@ -1,11 +1,11 @@
-package nhom8.shoppingweb.model;
+package nhom8.shoppingweb.entity;
 
 import nhom8.shoppingweb.repository.UserDAO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.thymeleaf.util.StringUtils;
 
 import java.util.Optional;
-import nhom8.shoppingweb.model.User;
+import nhom8.shoppingweb.entity.User;
 import nhom8.shoppingweb.repository.UserDAO;
 
 /*

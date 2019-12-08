@@ -2,7 +2,7 @@ package nhom8.shoppingweb.controller;
 
 import java.security.Principal;
 import java.util.Optional;
-import nhom8.shoppingweb.model.Message;
+import nhom8.shoppingweb.entity.Message;
 import nhom8.shoppingweb.service.MessageService;
 import nhom8.shoppingweb.service.UserService;
 import nhom8.shoppingweb.utils.WebUtils;
@@ -36,8 +36,8 @@ public class MainController {
     @PostMapping("/contact")
     public String addMessage(@ModelAttribute Message msg) {
         return Optional.ofNullable(messageService.add(msg))
-                .map(t -> "fragments/msuccess")
-                .orElse("fragments/mfailed");
+                .map(t -> "fragments/success")
+                .orElse("fragments/failed");
     }
 
     @RequestMapping(value = "/adminControlPanel", method = RequestMethod.GET)
@@ -45,7 +45,7 @@ public class MainController {
         return "adminControlPanel";
     }
 
-    @RequestMapping(value = { "/", "/welcome" }, method = RequestMethod.GET)
+    @RequestMapping(value = "/welcome", method = RequestMethod.GET)
     public String welcomePage(Model model) {
         model.addAttribute("title", "Welcome");
         model.addAttribute("message", "This is welcome page!");
@@ -90,7 +90,7 @@ public class MainController {
 
         return "403";
     }
-    @RequestMapping(value = "/index", method = RequestMethod.GET)
+    @RequestMapping(value = {"/index", "/"}, method = RequestMethod.GET)
     public String index(Model model){
         return "index";
     }

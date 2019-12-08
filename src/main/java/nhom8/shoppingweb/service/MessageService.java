@@ -1,8 +1,8 @@
 package nhom8.shoppingweb.service;
 
 
-import nhom8.shoppingweb.model.Message;
-import nhom8.shoppingweb.model.MessageValidator;
+import nhom8.shoppingweb.entity.Message;
+import nhom8.shoppingweb.entity.MessageValidator;
 import nhom8.shoppingweb.repository.MessageRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
