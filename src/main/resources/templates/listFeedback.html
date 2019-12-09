@@ -9,7 +9,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
     <head>
         <meta charset="UTF-8"/>
-        <title>Admin Page</title>
+        <title>List Product</title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
         <link th:href="@{/css/bootstrap.css}" rel="stylesheet" type="text/css" media="all" />
         <!--theme-style-->
@@ -21,6 +21,14 @@ License URL: http://creativecommons.org/licenses/by/3.0/
         <link th:href="@{http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800}" rel="stylesheet" type="text/css">
         <!--//fonts-->
         <script th:src="@{/js/jquery.min.js}"></script>
+        <style>
+            table, th, td, tr {
+                border: 1px solid black;
+            }
+            td {
+                padding-right: 30px;
+            }
+        </style>
     </head>
     <body> 
         <!-- chèn fragment header-->
@@ -28,27 +36,26 @@ License URL: http://creativecommons.org/licenses/by/3.0/
         
         <div class="container">
             <div class=" single_top">
-                <h1>ADMIN CONTROL PAGE</h1>
-                <br>
-                <h2>PRODUCTS</h2>
-                <a th:href="@{/addProduct}"><span class="on-get">ADD A NEW PRODUCT</span></a>
-                <a th:href="@{/listProduct}"><span class="on-get">PRODUCTS LIST</span></a>
-                
-                <h2>PRODUCERS</h2>
-                <a th:href="@{/addProducer}"><span class="on-get">ADD A NEW PRODUCER</span></a>
-                <a th:href="@{/listProducer}"><span class="on-get">PRODUCERS LIST</span></a>
-                
-                <h2>ORDERS</h2>
-                <a th:href="@{/listOrder}"><span class="on-get">ORDERS LIST</span></a>
-
-                <h2>USERS</h2>
-                <a th:href="@{/listUser}"><span class="on-get">USERS LIST</span></a>
-
-                <h2>FEEDBACKS</h2>
-                <a th:href="@{/listFeedback}"><span class="on-get">READ FEEDBACKS</span></a>
-
-                <h2>ORDERS</h2>
-                <a th:href="@{#}"><span class="on-get">ORDERS LIST</span></a>
+                <p><b>PAGE <span th:text="${currentPage}"></span></b></p>
+                <table>
+                    <tr>
+                        <th>Id</th>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Feedback</th>
+                    </tr>
+                    <th:block th:each="msg : ${listFeedback}">
+                        <tr>
+                            <td><a th:text="${msg.getID()}"></a></td>
+                            <td><a th:text="${msg.getNAME()}"></a></td>
+                            <td><a th:text="${msg.getEMAIL()}"></a></td>
+                            <td><a th:text="${msg.getMESSAGE()}"></a></td>
+                        </tr>
+                    </th:block>
+                </table>
+                <p></p>
+                <a th:if="${currentPage > 0}" th:href="@{/listFeedback(page=${currentPage-1})}"><span class="on-get">Previous page</span></a>
+                <a th:if="${currentPage < numberOfPages}" th:href="@{/listFeedback(page=${currentPage+1})}"><span class="on-get">Next page</span></a>
                 <div class="clearfix"> </div>
             </div>
 
