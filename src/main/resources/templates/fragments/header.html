@@ -1,38 +1,55 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
-<head>
-</head>
-<body>
-<!-- khai báo fragment nhớ thêm tên class cũ để nhận được css property ứng với class đó. -->
-<div th:fragment="header" class="header">
-    <div class="top-header">
-        <div class="container">
-            <div class="top-header-left">
-                <ul class="support">
-                    <li><a><label> </label></a></li>
-                    <li><a href="contact.html">24x7 live<span class="live"> support</span></a></li>
-                </ul>
-                <ul class="support">
-                    <li class="van"><a href="#"><label> </label></a></li>
-                    <li><a>Free shipping <span class="live">on order over 500</span></a></li>
-                </ul>
-                <div class="clearfix"> </div>
-            </div>
-            <div class="clearfix"> </div>
-        </div>
-    </div>
-    <div class="bottom-header">
-        <div class="container">
-            <div class="header-bottom-left">
-                <div class="logo">
-                    <a th:href="@{/index}"><img th:src="@{/images/logo.png}" alt="Home" /></a>
+    <head>
+    </head>
+    <body>
+        <!-- khai báo fragment nhớ thêm tên class cũ để nhận được css property ứng với class đó. -->
+        <div th:fragment="header" class="header">
+            <div class="top-header">
+                <div class="container">
+                    <div class="top-header-left">
+                        <ul class="support">
+                            <li><a><label> </label></a></li>
+                            <li><a>24x7 live<span class="live"> support</span></a></li> 
+                        </ul>
+                        <ul class="support">
+                            <li class="van"><a href="#"><label> </label></a></li>
+                            <li><a>Free shipping <span class="live">on order over 500</span></a></li>
+                        </ul>
+                        <div class="clearfix"> </div>
+                    </div>
+                    <div class="clearfix"> </div>		
                 </div>
-                <div class="search">
-                    <input type="text" value="" onfocus="this.value = '';" onblur="if (this.value == '') {
-                                        this.value = '';
-                                    }" >
-                    <input type="submit"  value="SEARCH">
+            </div>
+            <div class="bottom-header">
+                <div class="container">
+                    <div class="header-bottom-left">
+                        <div class="logo">
+                            <a th:href="@{/index}"><img th:src="@{/images/logo.png}" alt="Home" /></a>
+                        </div>
+                        <div class="search">
+                            <form th:action="@{/listProductSearch}" method="post">
+                                <input type="text" value="" onfocus="this.value = '';" onblur="if (this.value == '') {
+                                            this.value = '';
+                                        }" id="pattern" name="pattern" >
+                                <input type="submit"  value="SEARCH">
+                            </form>
 
+                        </div>
+                        <div class="clearfix"> </div>
+                    </div>
+                    <div class="header-bottom-right">					
+<!--                        <div class="account"><a href="login.html"><span> </span>YOUR ACCOUNT</a></div>-->
+                        <ul class="login">
+                            <!--chưa đăng nhập-->
+                            <li th:if="${!#request.isUserInRole('USER ') && !#request.isUserInRole('ADMIN')}"><a th:href="@{/login}"><span> </span>|LOGIN</a></li>
+                            <li th:if="${!#request.isUserInRole('USER ') && !#request.isUserInRole('ADMIN')}"><a th:href="@{/register}">|SIGNUP|</a></li>
+                            <li th:if="${#request.isUserInRole('USER ') || #request.isUserInRole('ADMIN')}"><a th:href="@{/logout}">|LOGOUT|</a></li>
+                        </ul>
+                        <div class="cart"><a th:href="@{/cart}"><span> </span>CART</a></div>
+                        <div class="clearfix"> </div>
+                    </div>
+                    <div class="clearfix"> </div>	
                 </div>
                 <div class="clearfix"> </div>
             </div>

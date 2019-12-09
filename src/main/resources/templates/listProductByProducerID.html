@@ -1,0 +1,69 @@
+<!--A Design by W3layouts 
+Author: W3layout
+Author URL: http://w3layouts.com
+License: Creative Commons Attribution 3.0 Unported
+License URL: http://creativecommons.org/licenses/by/3.0/
+-->
+<!DOCTYPE html>
+<!-- template mẫu cho mọi trang html -->
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8"/>
+        <title>Search Result</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <link th:href="@{/css/bootstrap.css}" rel="stylesheet" type="text/css" media="all" />
+        <!--theme-style-->
+        <link th:href="@{/css/style.css}" rel="stylesheet" type="text/css" media="all" />	
+        <!--//theme-style-->
+        <link th:href="@{/css/form.css}" rel="stylesheet" type="text/css" media="all" />	
+        <!--//theme-style-->
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+        <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+        <!--fonts-->
+        <link th:href="@{http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800}" rel="stylesheet" type="text/css">
+        <!--//fonts-->
+        <script th:src="@{/js/jquery.min.js}"></script>
+    </head>
+    <body> 
+        <!-- chèn fragment header-->
+        <div th:replace="/fragments/header :: header"/>
+        
+        <div class="container">
+            <div class=" single_top">
+                <p><b>PAGE <span th:text="${currentPage}"></span></b></p>
+                <table class="product-list">
+                    <tr>
+                        <th>Id</th>
+                        <th>Name</th>
+                        <th>Price</th>
+                        <th>Producer</th>
+                        <th>View</th>
+                        <th th:if="${#request.isUserInRole('ADMIN')}">Update</th>
+                        <th th:if="${#request.isUserInRole('ADMIN')}">Delete</th>
+                    </tr>
+                    <th:block th:each="product : ${listProduct}">
+                        <tr>
+                            <td><a th:text="${product.ID}"></a></td>
+                            <td><a th:text="${product.NAME}"></a></td>
+                            <td><a th:text="${product.PRICE}"></a></td>
+                            <td><a th:text="${product.PRODUCER_ID}"></a></td>
+                            <td><a th:href="@{/viewProduct/} + ${product.ID}">View</a></td>
+                            <td th:if="${#request.isUserInRole('ADMIN')}"><a th:href="@{/updateProduct/} + ${product.ID}">Update</a></td>
+                            <td th:if="${#request.isUserInRole('ADMIN')}"><a th:href="@{/deleteProduct/} + ${product.ID}">Delete</a></td>
+                        </tr>
+                    </th:block>
+                </table>
+                <p></p>
+                <a th:if="${currentPage > 0}" th:href="@{/listProductByProducerID(page=${currentPage-1}, producerID=${producerID})}"><span class="on-get">Previous page</span></a>
+                <a th:if="${currentPage < numberOfPages - 1}" th:href="@{/listProductByProducerID(page=${currentPage+1}, producerID=${producerID})}"><span class="on-get">Next page</span></a>
+                <div class="clearfix"> </div>
+            </div>
+
+            <!-- chèn fragment sub-cate -->
+            <div th:replace="/fragments/sub-cate :: sub-cate"/>
+            <div class="clearfix"> </div>
+        </div>
+        <!-- chèn fragment footer -->
+        <div th:replace="/fragments/footer :: footer"/>
+    </body>
+</html>

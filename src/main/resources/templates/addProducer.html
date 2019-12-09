@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Add Producer</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link th:href="@{/css/bootstrap.css}" rel="stylesheet" type="text/css" media="all"/>
+    <!--theme-style-->
+    <link th:href="@{/css/style.css}" rel="stylesheet" type="text/css" media="all"/>
+    <!--//theme-style-->
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <script type="application/x-javascript"> addEventListener("load", function () {
+        setTimeout(hideURLbar, 0);
+    }, false);
+
+    function hideURLbar() {
+        window.scrollTo(0, 1);
+    } </script>
+    <!--fonts-->
+    <link th:href="@{http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800}" rel="stylesheet"
+          type="text/css">
+    <!--//fonts-->
+    <script th:src="@{/js/jquery.min.js}"></script>
+</head>
+<body>
+<!--header-->
+<div th:replace="/fragments/header :: header"/>
+<!---->
+<div class="container">
+
+    <div class="register">
+        <form th:action="@{/addProducer}" th:object="${producer}" method="post">
+			<div class="  register-top-grid">
+				<h3>NEW PRODUCER INFORMATION</h3>
+				<div class="mation">
+					<span>NAME<label>*</label></span>
+					<input type="text" th:field="*{NAME}">
+
+					<span>WEBSITE<label>*</label></span>
+					<input type="text" th:field="*{WEBSITE}">
+				</div>
+				<div class="clearfix"></div>
+			</div>
+            <div class="clearfix"></div>
+            <div class="register-but">
+                <form>
+                    <input type="submit" value="Submit">
+                    <div class="clearfix"></div>
+                </form>
+            </div>
+        </form>
+        <div class="clearfix"></div>
+    </div>
+    <div th:replace="/fragments/sub-cate :: sub-cate"/>
+    <div class="clearfix"></div>
+</div>
+<!---->
+<div th:replace="/fragments/footer :: footer"/>
+</body>
+</html>

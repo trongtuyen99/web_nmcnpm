@@ -15,20 +15,22 @@ License URL: http://creativecommons.org/licenses/by/3.0/
         <!--theme-style-->
         <link th:href="@{/css/style.css}" rel="stylesheet" type="text/css" media="all" />	
         <!--//theme-style-->
+        <link th:href="@{/css/form.css}" rel="stylesheet" type="text/css" media="all" />	
+        <!--//theme-style-->
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
         <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
         <!--fonts-->
         <link th:href="@{http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800}" rel="stylesheet" type="text/css">
         <!--//fonts-->
         <script th:src="@{/js/jquery.min.js}"></script>
-        <style>
+<!--        <style>
             table, th, td, tr {
                 border: 1px solid black;
             }
             td {
                 padding-right: 30px;
             }
-        </style>
+        </style>-->
     </head>
     <body> 
         <!-- chèn fragment header-->
@@ -37,15 +39,15 @@ License URL: http://creativecommons.org/licenses/by/3.0/
         <div class="container">
             <div class=" single_top">
                 <p><b>PAGE <span th:text="${currentPage}"></span></b></p>
-                <table>
+                <table class="product-list">
                     <tr>
                         <th>Id</th>
                         <th>Name</th>
                         <th>Price</th>
                         <th>Producer</th>
                         <th>View</th>
-                        <th>Update</th>
-                        <th>Delete</th>
+                        <th th:if="${#request.isUserInRole('ADMIN')}">Update</th>
+                        <th th:if="${#request.isUserInRole('ADMIN')}">Delete</th>
                     </tr>
                     <th:block th:each="product : ${listProduct}">
                         <tr>
@@ -54,14 +56,14 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                             <td><a th:text="${product.PRICE}"></a></td>
                             <td><a th:text="${product.PRODUCER_ID}"></a></td>
                             <td><a th:href="@{/viewProduct/} + ${product.ID}">View</a></td>
-                            <td><a th:href="@{/updateProduct/} + ${product.ID}">Update</a></td>
-                            <td><a th:href="@{/deleteProduct/} + ${product.ID}">Delete</a></td>
+                            <td th:if="${#request.isUserInRole('ADMIN')}"><a th:href="@{/updateProduct/} + ${product.ID}">Update</a></td>
+                            <td th:if="${#request.isUserInRole('ADMIN')}"><a th:href="@{/deleteProduct/} + ${product.ID}">Delete</a></td>
                         </tr>
                     </th:block>
                 </table>
                 <p></p>
                 <a th:if="${currentPage > 0}" th:href="@{/listProduct(page=${currentPage-1})}"><span class="on-get">Previous page</span></a>
-                <a th:if="${currentPage < numberOfPages}" th:href="@{/listProduct(page=${currentPage+1})}"><span class="on-get">Next page</span></a>
+                <a th:if="${currentPage < numberOfPages - 1}" th:href="@{/listProduct(page=${currentPage+1})}"><span class="on-get">Next page</span></a>
                 <div class="clearfix"> </div>
             </div>
 

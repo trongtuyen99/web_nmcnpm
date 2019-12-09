@@ -17,26 +17,12 @@ public class ProductService {
     @Autowired
     private ProductValidator pvalidator;
 
-
-    /**
-     * Lấy ra danh sách List<User>
-     *
-     * @param limit - Giới hạn số lượng lấy ra
-     *
-     * @return Trả về danh sách List<User> dựa theo limit, nếu limit == null thì trả findAll()
-     */
-
     public List<Product> findAll(Integer limit) {
         return Optional.ofNullable(limit)
                 .map(value -> productRepository.findAll(PageRequest.of(0, value)).getContent())
                 .orElseGet(() -> productRepository.findAll());
     }
 
-    /**
-     * Thêm một User mới vào danh sách
-     *
-     * @return Trả về đối tượng User sau khi lưu vào DB, trả về null nếu không thành công
-     */
     public Product add(Product product) {
         if (pvalidator.isValid(product)) {
             return productRepository.save(product);

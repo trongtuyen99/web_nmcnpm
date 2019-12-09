@@ -60,7 +60,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                 <h4><span th:text="${product.NAME}"></span></h4>
                 <div class="cart-b">
                     <div class="left-n "><span th:text="${product.PRICE}"></span> VND</div>
-                    <a class="now-get get-cart-in" href="#">ADD TO CART</a>
+                    <a class="now-get get-cart-in" th:href="@{/addToCart/} + ${product.ID}">ADD TO CART</a>
                     <div class="clearfix"></div>
                 </div>
                 <h6><span th:text="${product.STOCK_NUMBER}"></span> items in stock</h6>

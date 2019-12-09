@@ -8,13 +8,6 @@ import nhom8.shoppingweb.service.UserDetailsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
-import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.web.authentication.rememberme.InMemoryTokenRepositoryImpl;
-import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
 
 @Configuration
 @EnableWebSecurity
@@ -96,20 +89,12 @@ public class MainConfig extends WebSecurityConfigurerAdapter {
 //        return memory;
 //    }
     public class UserConfig {
-        /**
-         * Tạo ra Bean UserValidator để sử dụng sau này
-         * @return
-         */
         @Bean
         public UserValidator uvalidator() {
             return new UserValidator();
         }
     }
     public class MessageConfig {
-        /**
-         * Tạo ra Bean MessageValidator để sử dụng sau này
-         * @return
-         */
         @Bean
         public MessageValidator mvalidator() {
             return new MessageValidator();

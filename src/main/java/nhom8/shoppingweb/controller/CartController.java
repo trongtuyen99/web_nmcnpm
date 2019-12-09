@@ -17,6 +17,8 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpSession;
 import java.util.Date;
 import java.util.Optional;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.web.servlet.view.RedirectView;
 
 @Controller
 public class CartController {
@@ -34,7 +36,7 @@ public class CartController {
     @RequestMapping("/listOrder")
     public String listOrder(Model model,
                                @RequestParam(name = "page", required = false, defaultValue = "0") Integer page,
-                               @RequestParam(name = "size", required = false, defaultValue = "2") Integer size,
+                               @RequestParam(name = "size", required = false, defaultValue = "10") Integer size,
                                @RequestParam(name = "sort", required = false, defaultValue = "ASC") String sort) {
         Sort sortable = null;
         if (sort.equals("ASC")) {
@@ -105,10 +107,15 @@ public class CartController {
     public String buy(@RequestParam(name = "id", required = true) int id,
                       @RequestParam(name = "quantity", required = true) int quantity,
                       Model model) {
-        model.addAttribute("id", id);
-        model.addAttribute("quantity", quantity);
-        model.addAttribute("address", new String());
-        return "/order";
+        Optional<Product> o_product = productRepository.findById(id);
+        if (o_product.isPresent()) {
+            model.addAttribute("id", id);
+            model.addAttribute("quantity", quantity);
+            model.addAttribute("name", o_product.get().getNAME());
+            model.addAttribute("address", new String());
+            return "/order";
+        }
+        return "fragments/failed";
     }
     
     @PostMapping("/order")
@@ -117,7 +124,7 @@ public class CartController {
                         @ModelAttribute("address") String address,
                         HttpSession session) {
         Cart cart = (Cart) session.getAttribute("cart");
-        if (cart.getCartItems().containsKey(id)){
+        if (cart.getCartItems().containsKey(id) && quantity > 0){
             Optional<Product> o_product = productRepository.findById(id);
             if (o_product.isPresent()) {  
                 Product product = o_product.get();
