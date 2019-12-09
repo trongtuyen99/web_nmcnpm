@@ -3,6 +3,7 @@ package nhom8.shoppingweb.config;
 import nhom8.shoppingweb.model.MessageValidator;
 import nhom8.shoppingweb.model.ProductValidator;
 import nhom8.shoppingweb.model.UserValidator;
+import nhom8.shoppingweb.model.ProducerValidator;
 import nhom8.shoppingweb.service.UserDetailsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -122,6 +123,16 @@ public class MainConfig extends WebSecurityConfigurerAdapter {
         @Bean
         public ProductValidator pvalidator() {
             return new ProductValidator();
+        }
+    }
+    public class ProducerConfig {
+        /**
+         * Tạo ra Bean ProductValidator để sử dụng sau này
+         * @return
+         */
+        @Bean
+        public ProducerValidator p2validator() {
+            return new ProducerValidator();
         }
     }
 }
