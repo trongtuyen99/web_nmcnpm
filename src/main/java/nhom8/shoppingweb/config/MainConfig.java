@@ -8,6 +8,11 @@ import nhom8.shoppingweb.service.UserDetailsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 @Configuration
 @EnableWebSecurity
@@ -68,12 +73,12 @@ public class MainConfig extends WebSecurityConfigurerAdapter {
                 // Submit URL của trang login
                 .loginProcessingUrl("/j_spring_security_check") // Submit URL
                 .loginPage("/login") // trang login
-                .defaultSuccessUrl("/userAccountInfo") // login thành công
+                .defaultSuccessUrl("/") // login thành công
                 .failureUrl("/login?error=true") // login thất bại
                 .usernameParameter("username")
                 .passwordParameter("password")
                 // Cấu hình cho Logout Page.
-                .and().logout().logoutUrl("/logout").logoutSuccessUrl("/logoutSuccessful");
+                .and().logout().logoutUrl("/logout").logoutSuccessUrl("/index");
 
         // Cấu hình Remember Me.
 //        http.authorizeRequests().and()
@@ -101,20 +106,14 @@ public class MainConfig extends WebSecurityConfigurerAdapter {
         }
     }
     public class ProductConfig {
-        /**
-         * Tạo ra Bean ProductValidator để sử dụng sau này
-         * @return
-         */
+
         @Bean
         public ProductValidator pvalidator() {
             return new ProductValidator();
         }
     }
     public class ProducerConfig {
-        /**
-         * Tạo ra Bean ProductValidator để sử dụng sau này
-         * @return
-         */
+
         @Bean
         public ProducerValidator p2validator() {
             return new ProducerValidator();

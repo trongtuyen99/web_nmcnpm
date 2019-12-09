@@ -2,8 +2,8 @@ package nhom8.shoppingweb.controller;
 
 import java.security.Principal;
 import java.util.Optional;
-import nhom8.shoppingweb.entity.Message;
-import nhom8.shoppingweb.entity.Product;
+import nhom8.shoppingweb.model.Message;
+import nhom8.shoppingweb.model.Product;
 import nhom8.shoppingweb.repository.ProductRepository;
 import nhom8.shoppingweb.service.MessageService;
 import nhom8.shoppingweb.utils.WebUtils;
@@ -73,4 +73,5 @@ public class MainController {
         model.addAttribute("listProduct", pageProduct);
         return "index";
     }
+
 }

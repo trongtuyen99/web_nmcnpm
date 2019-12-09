@@ -53,18 +53,6 @@
                 </div>
                 <div class="clearfix"> </div>
             </div>
-            <div class="header-bottom-right">
-                <!--                        <div class="account"><a href="login.html"><span> </span>YOUR ACCOUNT</a></div>-->
-                <ul class="login">
-                    <!--chưa đăng nhập-->
-                    <li th:if="${!#request.isUserInRole('USER ') && !#request.isUserInRole('ADMIN')}"><a th:href="@{/login.html}"><span> </span>|LOGIN</a></li>
-                    <li th:if="${!#request.isUserInRole('USER ') && !#request.isUserInRole('ADMIN')}"><a th:href="@{/register.html}">|SIGNUP|</a></li>
-                    <li th:if="${#request.isUserInRole('USER ') || #request.isUserInRole('ADMIN')}"><a th:href="@{/logout.html}">|LOGOUT|</a></li>
-                </ul>
-                <div class="cart"><a href="#"><span> </span>CART</a></div>
-                <div class="clearfix"> </div>
-            </div>
-            <div class="clearfix"> </div>
         </div>
     </div>
 </div>

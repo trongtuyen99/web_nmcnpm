@@ -26,7 +26,7 @@ public class UserController {
     @Autowired
     private UserRepository userRepository;
 
-    @GetMapping("/register.html")
+    @GetMapping("/register")
     public String addUser(Model model) {
         model.addAttribute("user", new nhom8.shoppingweb.model.User());
         return "register";
@@ -35,7 +35,7 @@ public class UserController {
     /*
     @ModelAttribute đánh dấu đối tượng User được gửi lên bởi Form Request
      */
-    @PostMapping("/register.html")
+    @PostMapping("/register")
     public String addUser(@ModelAttribute nhom8.shoppingweb.model.User user) {
         return Optional.ofNullable(userService.add(user))
                 .map(t -> "fragments/rsuccess")

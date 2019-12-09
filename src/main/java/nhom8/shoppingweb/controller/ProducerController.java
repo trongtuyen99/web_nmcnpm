@@ -20,12 +20,12 @@ public class ProducerController {
     // thêm nsx mới
     @GetMapping("/addProducer")
     public String addProducer(Model model) {
-        model.addAttribute("producer", new nhom8.shoppingweb.entity.Producer());
+        model.addAttribute("producer", new nhom8.shoppingweb.model.Producer());
         return "addProducer";
     }
 
     @PostMapping("/addProducer")
-    public String addProducer(@ModelAttribute nhom8.shoppingweb.entity.Producer producer) {
+    public String addProducer(@ModelAttribute nhom8.shoppingweb.model.Producer producer) {
         return Optional.ofNullable(producerService.add(producer))
                 .map(t -> "fragments/success")
                 .orElse("fragments/failed");

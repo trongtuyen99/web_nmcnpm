@@ -1,7 +1,7 @@
 package nhom8.shoppingweb.controller;
 
 import java.util.Optional;
-import nhom8.shoppingweb.entity.Product;
+import nhom8.shoppingweb.model.Product;
 import nhom8.shoppingweb.repository.ProductRepository;
 import nhom8.shoppingweb.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +13,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Optional;
 
 @Controller
 public class ProductController {
@@ -28,12 +27,12 @@ public class ProductController {
     // thêm sản phẩm mới
     @GetMapping("/addProduct")
     public String addProduct(Model model) {
-        model.addAttribute("product", new nhom8.shoppingweb.entity.Product());
+        model.addAttribute("product", new nhom8.shoppingweb.model.Product());
         return "addProduct";
     }
 
     @PostMapping("/addProduct")
-    public String addProduct(@ModelAttribute nhom8.shoppingweb.entity.Product product) {
+    public String addProduct(@ModelAttribute nhom8.shoppingweb.model.Product product) {
         return Optional.ofNullable(productService.add(product))
                 .map(t -> "fragments/success")
                 .orElse("fragments/failed");
@@ -126,14 +125,14 @@ public class ProductController {
     // sửa sản phẩm
     @GetMapping("/updateProduct/{id}")
     public String updateProduct(@PathVariable int id, Model model) {
-        nhom8.shoppingweb.entity.Product product = new nhom8.shoppingweb.entity.Product();
+        nhom8.shoppingweb.model.Product product = new nhom8.shoppingweb.model.Product();
         product.setID(id);
         model.addAttribute("product", product);
         return "updateProduct";
     }
 
     @PostMapping("/updateProduct")
-    public String updateProduct(@ModelAttribute nhom8.shoppingweb.entity.Product product) {
+    public String updateProduct(@ModelAttribute nhom8.shoppingweb.model.Product product) {
         return Optional.ofNullable(productService.update(product))
                 .map(t -> "fragments/success")
                 .orElse("fragments/failed");
