@@ -1,4 +1,4 @@
-package nhom8.shoppingweb.entity;
+package nhom8.shoppingweb.model;
 
 import java.io.Serializable;
 import javax.persistence.*;

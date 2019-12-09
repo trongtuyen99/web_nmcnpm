@@ -1,4 +1,4 @@
-package nhom8.shoppingweb.entity;
+package nhom8.shoppingweb.model;
 
 import org.thymeleaf.util.StringUtils;
 
