@@ -1,6 +1,5 @@
-package nhom8.shoppingweb.model;
+package nhom8.shoppingweb.entity;
 
-import nhom8.shoppingweb.model.User;
 import nhom8.shoppingweb.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.thymeleaf.util.StringUtils;

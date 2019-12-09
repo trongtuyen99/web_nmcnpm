@@ -10,7 +10,7 @@
                     <div class="top-header-left">
                         <ul class="support">
                             <li><a><label> </label></a></li>
-                            <li><a href="/contact">24x7 live<span class="live"> support</span></a></li>
+                            <li><a>24x7 live<span class="live"> support</span></a></li> 
                         </ul>
                         <ul class="support">
                             <li class="van"><a href="#"><label> </label></a></li>
@@ -37,14 +37,11 @@
 
                         </div>
                         <div class="clearfix"> </div>
-
                     </div>
-                    <div class="header-bottom-right">
-
+                    <div class="header-bottom-right">					
+<!--                        <div class="account"><a href="login.html"><span> </span>YOUR ACCOUNT</a></div>-->
                         <ul class="login">
                             <!--chưa đăng nhập-->
-                            <li th:if="${#request.isUserInRole('USER ') || #request.isUserInRole('ADMIN')}">Welcome <span style="color: #F97E76" th:utext="${#request.userPrincipal.name + '!'}"></span></li>
-                            <div class="clearfix"> </div>
                             <li th:if="${!#request.isUserInRole('USER ') && !#request.isUserInRole('ADMIN')}"><a th:href="@{/login}"><span> </span>|LOGIN</a></li>
                             <li th:if="${!#request.isUserInRole('USER ') && !#request.isUserInRole('ADMIN')}"><a th:href="@{/register}">|SIGNUP|</a></li>
                             <li th:if="${#request.isUserInRole('USER ') || #request.isUserInRole('ADMIN')}"><a th:href="@{/logout}">|LOGOUT|</a></li>
