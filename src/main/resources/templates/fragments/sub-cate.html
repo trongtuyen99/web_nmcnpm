@@ -10,7 +10,7 @@
                 <h3 class="cate">MENU</h3>
                 <ul class="menu">
                     <ul class="kid-menu ">
-                        <li th:if="${!#request.isUserInRole('ADMIN')}"><a th:href="@{/listProduct}">View All Products</a></li>
+                        <li th:if="${!#request.isUserInRole('ADMIN')}"><a th:href="@{/listProductUser}">View All Products</a></li>
                         <li th:if="${!#request.isUserInRole('ADMIN')}"><a th:href="@{/listProducer}">Search Products By Producer</a></li>
                         <li th:if="${#request.isUserInRole('ADMIN')}"><a th:href="@{/adminControlPanel}">Admin Control Panel</a></li>
                         <li th:if="${!#request.isUserInRole('ADMIN')}"><a th:href="@{/cart}">Cart</a></li>

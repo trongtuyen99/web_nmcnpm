@@ -19,38 +19,25 @@ import org.springframework.web.bind.annotation.*;
 
 @Controller
 public class MainController {
+    // controller các chức năng chung
     @Autowired
     private MessageService messageService;
-    
     @Autowired
     private ProductRepository productRepository;
 
-    @GetMapping("/contact")
-    public String addMessage(Model model) {
-        model.addAttribute("msg", new Message());
-        return "contact";
-    }
-
-    /*
-    @ModelAttribute đánh dấu đối tượng Message được gửi lên bởi Form Request
-     */
-    @PostMapping("/contact")
-    public String addMessage(@ModelAttribute Message msg) {
-        return Optional.ofNullable(messageService.add(msg))
-                .map(t -> "fragments/success")
-                .orElse("fragments/failed");
-    }
-
+    // trang chức năng của admin
     @RequestMapping(value = "/adminControlPanel", method = RequestMethod.GET)
     public String adminControlPanel(Model model){
         return "adminControlPanel";
     }
-    
+
+    // đăng nhập
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public String login(Model model) {
         return "login";
     }
 
+    // trang lỗi
     @RequestMapping(value = "/403", method = RequestMethod.GET)
     public String accessDenied(Model model, Principal principal) {
 
@@ -66,6 +53,8 @@ public class MainController {
 
         return "403";
     }
+
+    // trang chủ
     @RequestMapping(value = {"/index", "/"}, method = RequestMethod.GET)
     public String index(Model model){
         // hiện 5 sản phẩm ra index cho đẹp

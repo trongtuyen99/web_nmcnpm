@@ -3,10 +3,7 @@ package nhom8.shoppingweb.utils;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 public class EncryptedPasswordUtils {
-    /*
-        Mã hóa mật khẩu bằng BCryptPasswordEncoder.
-        Khi lưu mật khẩu vào csdl, phải mã hóa trước.
-    */
+    // Mã hóa mật khẩu bằng BCryptPasswordEncoder.
     public static String encryptedPassword(String password) {
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
         return encoder.encode(password);

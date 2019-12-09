@@ -3,6 +3,7 @@ package nhom8.shoppingweb.model;
 import java.util.HashMap;
 
 public class Cart {
+    // giỏ hàng
     private HashMap<Integer, Integer> cartItems;
 
     public Cart() {

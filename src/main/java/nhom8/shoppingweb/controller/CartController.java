@@ -10,22 +10,17 @@ import nhom8.shoppingweb.repository.OrderRepository;
 import nhom8.shoppingweb.repository.ProductRepository;
 import nhom8.shoppingweb.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import org.springframework.web.servlet.view.RedirectView;
 
 @Controller
 public class CartController {
-    /*
-        Controller. Xử lý các request GET, POST,...
-    */
-    @Autowired
-    private ProductService productService;
+    // controller cho giỏ hàng và đơn hàng.
     @Autowired
     private ProductRepository productRepository;
     @Autowired
@@ -45,8 +40,9 @@ public class CartController {
             sortable = Sort.by("id").descending();
         }
         Pageable pageable = PageRequest.of(page, size, sortable);
-        model.addAttribute("listOrder", orderRepository.findAllOrders(pageable));
-        model.addAttribute("numberOfPages", orderRepository.findAll().size() / size);
+        Page<Order> pageOrder = orderRepository.findAllOrders(pageable);
+        model.addAttribute("listOrder", pageOrder);
+        model.addAttribute("numberOfPages", pageOrder.getTotalPages());
         model.addAttribute("currentPage", page);
         return "listOrder";
     }
@@ -65,9 +61,10 @@ public class CartController {
     @RequestMapping("/deleteOrder/{id}")
     public String deleteOrder(@PathVariable int id) {
         orderRepository.deleteById(id);
-        return "fragments/success";
+        return "success";
     }
-    
+
+    // thêm sản phẩm có id = {id} vào giỏ
     @GetMapping("/addToCart/{id}")
     public String addToCart(@PathVariable int id, HttpSession session) {
         Cart cart;
@@ -78,9 +75,10 @@ public class CartController {
         }
         cart.addItem(id);
         session.setAttribute("cart", cart);
-        return "/fragments/success";
+        return "/success";
     }
-    
+
+    // hiển thị giỏ hàng
     @RequestMapping("/cart")
     public String cart(Model model, HttpSession session) {
         if (session.getAttribute("cart") != null) {
@@ -88,7 +86,8 @@ public class CartController {
         }
         return "cart";
     }
-    
+
+    // xóa sản phẩm khỏi giỏ
     @GetMapping("/deleteItem/{id}")
     public String deleteItem(@PathVariable int id, HttpSession session) {
         if (session.getAttribute("cart") != null) {
@@ -96,12 +95,13 @@ public class CartController {
             if (cart.getCartItems().containsKey(id)){
                 cart.deleteItem(id);
                 session.setAttribute("cart", cart);
-                return "/fragments/success";
+                return "/success";
             }
         }
-        return "/fragments/failed";
+        return "/failed";
     }
-    
+
+    // mua hàng
     @RequestMapping(value = "/buy", method = {RequestMethod.GET, RequestMethod.POST})
     public String buy(@RequestParam(name = "id", required = true) int id,
                       @RequestParam(name = "quantity", required = true) int quantity,
@@ -114,9 +114,10 @@ public class CartController {
             model.addAttribute("address", new String());
             return "/order";
         }
-        return "fragments/failed";
+        return "failed";
     }
-    
+
+    // lưu đơn hàng
     @PostMapping("/order")
     public String order(@ModelAttribute("id") int id,
                         @ModelAttribute("quantity") int quantity,
@@ -127,18 +128,22 @@ public class CartController {
             Optional<Product> o_product = productRepository.findById(id);
             if (o_product.isPresent()) {  
                 Product product = o_product.get();
-                Order order = new Order();
-                order.setPRODUCT_ID(id);
-                order.setQUANTITY(quantity);
-                order.setADDRESS(address);
-                order.setPRICE(quantity * product.getPRICE());
-                order.setCREATED_TIME(new Date());
-                orderRepository.save(order);
-                cart.deleteItem(id);
-                session.setAttribute("cart", cart);
-                return "/fragments/success";
+                if (product.getSTOCK_NUMBER() - quantity >= 0) {
+                    product.setSTOCK_NUMBER(product.getSTOCK_NUMBER() - quantity);
+                    productRepository.save(product);
+                    Order order = new Order();
+                    order.setPRODUCT_ID(id);
+                    order.setQUANTITY(quantity);
+                    order.setADDRESS(address);
+                    order.setPRICE(quantity * product.getPRICE());
+                    order.setCREATED_TIME(new Date());
+                    orderRepository.save(order);
+                    cart.deleteItem(id);
+                    session.setAttribute("cart", cart);
+                    return "/success";
+                }
             }
         }
-        return "/fragments/failed";
+        return "/failed";
     }
 }

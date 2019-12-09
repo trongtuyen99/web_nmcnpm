@@ -42,6 +42,8 @@
 <!--                        <div class="account"><a href="login.html"><span> </span>YOUR ACCOUNT</a></div>-->
                         <ul class="login">
                             <!--chưa đăng nhập-->
+                            <li th:if="${#request.isUserInRole('USER ') || #request.isUserInRole('ADMIN')}">Welcome <span style="color: #F97E76" th:utext="${#request.userPrincipal.name + '!'}"></span></li>
+                            <div class="clearfix"> </div>
                             <li th:if="${!#request.isUserInRole('USER ') && !#request.isUserInRole('ADMIN')}"><a th:href="@{/login}"><span> </span>|LOGIN</a></li>
                             <li th:if="${!#request.isUserInRole('USER ') && !#request.isUserInRole('ADMIN')}"><a th:href="@{/register}">|SIGNUP|</a></li>
                             <li th:if="${#request.isUserInRole('USER ') || #request.isUserInRole('ADMIN')}"><a th:href="@{/logout}">|LOGOUT|</a></li>

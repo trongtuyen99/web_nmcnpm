@@ -16,9 +16,7 @@ import org.springframework.security.web.authentication.rememberme.PersistentToke
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
-    /*
-        Cài đặt Spring Security để phân quyền khi đăng nhập.
-    */
+    // Cài đặt Spring Security để phân quyền khi đăng nhập.
     @Autowired
     private UserDetailsServiceImpl userDetailsService;
 
@@ -33,43 +31,34 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-
         // Cài đặt dịch vụ để tìm kiếm User trong Database.
         // Và cài đặt PasswordEncoder.
         auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
-
     }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-
         http.csrf().disable();
         // Các trang không yêu cầu login, không yêu cầu role nào
 //        http.authorizeRequests().antMatchers("/", "/logout").permitAll();
         // Các trang chỉ truy cập được khi là khách
         http.authorizeRequests().antMatchers("/login", "/register").access("isAnonymous()");
         // Các trang yêu cầu phải login với vai trò ROLE_USER hoặc ROLE_ADMIN.
-        // Nếu chưa login, nó sẽ redirect tới trang /login.
-        // lưu ý tên role là 'ROLE_USER ' (10 ký tự) chứ không phải 'ROLE_USER' (9 ký tự)
-        // vì thuộc tính quyenTruyCap trong database có kiểu char(10) cố định 10 ký tự
         http.authorizeRequests().antMatchers("/logout").access("hasAnyRole('ROLE_USER ', 'ROLE_ADMIN')");
-
         // Các trang yêu cầu phải login với vai trò ROLE_ADMIN
         http.authorizeRequests().antMatchers(
-                "/adminControlPanel", "/addProduct",
-                "/deleteProduct", "/updateProduct", 
-                "/deleteProduct/{id}", "/updateProduct/{id}",
-                "/addProducer", "listOrder"
+                "/adminControlPanel",
+                "/addProduct", "/deleteProduct", "/updateProduct", "/deleteProduct/{id}", "/updateProduct/{id}",
+                "/listUser", "/viewUser", "/viewUser/{id}", "/delete", "/deleteUser/{id}", "/updateUser", "/updateUser/{id}",
+                "/addProducer", "/deleteProducer", "/deleteProducer/{id}",
+                "/listOrder", "/deleteOrder", "/deleteOrder/{id}",
+                "/listFeedback"
         ).access("hasRole('ROLE_ADMIN')");
 
         // Các trang yêu cầu phải login với vai trò ROLE_USER
 //        http.authorizeRequests().antMatchers().access("hasRole('ROLE_USER ')");
-
-        // Khi người dùng đã login, với vai trò XX.
-        // Nhưng truy cập vào trang yêu cầu vai trò YY,
-        // Ngoại lệ AccessDeniedException sẽ ném ra, dẫn tới /403.
+        // Khi truy cập trang không được phép.
         http.authorizeRequests().and().exceptionHandling().accessDeniedPage("/403");
-
         // Cấu hình cho Login Form.
         http.authorizeRequests().and().formLogin()
                 // Submit URL của trang login
@@ -86,7 +75,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.authorizeRequests().and()
                 .rememberMe().tokenRepository(this.persistentTokenRepository())
                 .tokenValiditySeconds(86400); // = 24h
-
     }
 
     @Bean

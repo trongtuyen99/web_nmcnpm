@@ -1,9 +1,12 @@
 package nhom8.shoppingweb.controller;
 
 import java.util.Optional;
+
+import nhom8.shoppingweb.entity.Producer;
 import nhom8.shoppingweb.repository.ProducerRepository;
 import nhom8.shoppingweb.service.ProducerService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -13,10 +16,12 @@ import org.springframework.web.bind.annotation.*;
 
 @Controller
 public class ProducerController {
+    // controller nhà sản xuất.
     @Autowired
     private ProducerService producerService;
     @Autowired
     private ProducerRepository producerRepository;
+
     // thêm nsx mới
     @GetMapping("/addProducer")
     public String addProducer(Model model) {
@@ -27,8 +32,8 @@ public class ProducerController {
     @PostMapping("/addProducer")
     public String addProducer(@ModelAttribute nhom8.shoppingweb.entity.Producer producer) {
         return Optional.ofNullable(producerService.add(producer))
-                .map(t -> "fragments/success")
-                .orElse("fragments/failed");
+                .map(t -> "/success")
+                .orElse("/failed");
     }
 
     // hiển thị danh sách nsx (đã phân trang)
@@ -45,10 +50,11 @@ public class ProducerController {
             sortable = Sort.by("id").descending();
         }
         Pageable pageable = PageRequest.of(page, size, sortable);
-        model.addAttribute("listProducer", producerRepository.findAllProducers(pageable));
-        model.addAttribute("numberOfPages", producerRepository.findAll().size() / size);
+        Page<Producer> pageProducer = producerRepository.findAllProducers(pageable);
+        model.addAttribute("listProducer", pageProducer);
+        model.addAttribute("numberOfPages", pageProducer.getTotalPages());
         model.addAttribute("currentPage", page);
-        return "listProducer";
+        return "/listProducer";
     }
 
     // xóa nsx có ID = {id}
@@ -56,6 +62,6 @@ public class ProducerController {
     public String producerDelete(@PathVariable int id, Model model) {
         producerRepository.deleteById(id);
         model.addAttribute("listProducer", producerRepository.findAll());
-        return "fragments/success";
+        return "/success";
     }
 }

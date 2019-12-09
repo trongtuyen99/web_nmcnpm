@@ -16,9 +16,7 @@ import org.springframework.web.bind.annotation.*;
 
 @Controller
 public class ProductController {
-    /*
-        Controller. Xử lý các request GET, POST,...
-    */
+    // controller sản phẩm
     @Autowired
     private ProductService productService;
     @Autowired
@@ -34,8 +32,8 @@ public class ProductController {
     @PostMapping("/addProduct")
     public String addProduct(@ModelAttribute nhom8.shoppingweb.entity.Product product) {
         return Optional.ofNullable(productService.add(product))
-                .map(t -> "fragments/success")
-                .orElse("fragments/failed");
+                .map(t -> "/success")
+                .orElse("/failed");
     }
 
     // hiển thị danh sách sản phẩm (đã phân trang)
@@ -83,7 +81,7 @@ public class ProductController {
     @RequestMapping("/listProductSearch")
     public String listProductSearch(Model model,
                                @RequestParam(name = "page", required = false, defaultValue = "0") Integer page,
-                               @RequestParam(name = "size", required = false, defaultValue = "10") Integer size,
+                               @RequestParam(name = "size", required = false, defaultValue = "6") Integer size,
                                @RequestParam(name = "sort", required = false, defaultValue = "ASC") String sort,
                                @RequestParam(name = "pattern", required = true, defaultValue = "ASC") String pattern) {
         Sort sortable = null;
@@ -106,7 +104,7 @@ public class ProductController {
     @RequestMapping("/listProductByProducerID")
     public String listProductByProducerID(Model model,
                                @RequestParam(name = "page", required = false, defaultValue = "0") Integer page,
-                               @RequestParam(name = "size", required = false, defaultValue = "10") Integer size,
+                               @RequestParam(name = "size", required = false, defaultValue = "6") Integer size,
                                @RequestParam(name = "sort", required = false, defaultValue = "ASC") String sort,
                                @RequestParam(name = "producerID", required = true, defaultValue = "ASC") int producerID) {
         Sort sortable = null;
@@ -139,7 +137,7 @@ public class ProductController {
     @RequestMapping("/deleteProduct/{id}")
     public String productDelete(@PathVariable int id) {
         productRepository.deleteById(id);
-        return "fragments/success";
+        return "/success";
     }
 
     // sửa sản phẩm
@@ -154,7 +152,7 @@ public class ProductController {
     @PostMapping("/updateProduct")
     public String updateProduct(@ModelAttribute nhom8.shoppingweb.entity.Product product) {
         return Optional.ofNullable(productService.update(product))
-                .map(t -> "fragments/success")
-                .orElse("fragments/failed");
+                .map(t -> "/success")
+                .orElse("/failed");
     }
 }

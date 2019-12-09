@@ -55,7 +55,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                 </table>
                 <p></p>
                 <a th:if="${currentPage > 0}" th:href="@{/listOrder(page=${currentPage-1})}"><span class="on-get">Previous page</span></a>
-                <a th:if="${currentPage < numberOfPages}" th:href="@{/listOrder(page=${currentPage+1})}"><span class="on-get">Next page</span></a>
+                <a th:if="${currentPage < numberOfPages - 1}" th:href="@{/listOrder(page=${currentPage+1})}"><span class="on-get">Next page</span></a>
                 <div class="clearfix"> </div>
             </div>
 

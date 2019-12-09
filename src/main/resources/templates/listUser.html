@@ -15,6 +15,8 @@ License URL: http://creativecommons.org/licenses/by/3.0/
         <!--theme-style-->
         <link th:href="@{/css/style.css}" rel="stylesheet" type="text/css" media="all" />	
         <!--//theme-style-->
+        <link th:href="@{/css/form.css}" rel="stylesheet" type="text/css" media="all" />
+        <!--//theme-style-->
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
         <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
         <!--fonts-->
@@ -37,7 +39,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
         <div class="container">
             <div class=" single_top">
                 <p><b>PAGE <span th:text="${currentPage}"></span></b></p>
-                <table>
+                <table class="product-list">
                     <tr>
                         <th>Id</th>
                         <th>Full Name</th>
@@ -63,7 +65,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                 </table>
                 <p></p>
                 <a th:if="${currentPage > 0}" th:href="@{/listUser(page=${currentPage-1})}"><span class="on-get">Previous page</span></a>
-                <a th:if="${currentPage < numberOfPages}" th:href="@{/listUser(page=${currentPage+1})}"><span class="on-get">Next page</span></a>
+                <a th:if="${currentPage < numberOfPages - 1}" th:href="@{/listUser(page=${currentPage+1})}"><span class="on-get">Next page</span></a>
                 <div class="clearfix"> </div>
             </div>
 

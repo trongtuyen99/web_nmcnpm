@@ -34,7 +34,6 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                 <div class="product-left" th:each="product: ${listProduct}">
                     <div class="col-md-4 chain-grid grid-top-chain">
                         <a th:href="@{/viewProduct/} + ${product.ID}"><img class="img-responsive chain" th:src="@{${product.IMAGE}}" alt="File not found"></a>
-                        <span class="star"> </span>
                         <div class="grid-chain-bottom">
                             <h6><a th:href="@{/viewProduct/} + ${product.ID}"><span th:text="${product.NAME}"></span></a></h6>
                             <div class="star-price">

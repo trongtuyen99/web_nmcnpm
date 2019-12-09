@@ -6,7 +6,6 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 
 public class WebUtils {
-
     // lấy tên user dưới kiểu String
     public static String toString(User user) {
         StringBuilder sb = new StringBuilder();
