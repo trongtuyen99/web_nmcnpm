@@ -34,7 +34,7 @@ public class UserController {
     @ModelAttribute đánh dấu đối tượng User được gửi lên bởi Form Request
      */
     @PostMapping("/register")
-    public String addUser(@ModelAttribute nhom8.shoppingweb.model.User user) {
+    public String addUser(@ModelAttribute nhom8.shoppingweb.entity.User user) {
         return Optional.ofNullable(userService.add(user))
                 .map(t -> "fragments/success")
                 .orElse("fragments/failed");
@@ -64,7 +64,7 @@ public class UserController {
     // hiển thị User có ID = {id}
     @RequestMapping("/viewUser/{id}")
     public String viewUser(@PathVariable int id, Model model) {
-        Optional<nhom8.shoppingweb.model.User> user = userService.findById(id);
+        Optional<nhom8.shoppingweb.entity.User> user = userService.findById(id);
         if (user.isPresent()) {
             model.addAttribute("user", user.get());
         }
@@ -82,14 +82,14 @@ public class UserController {
     // sửa User
     @GetMapping("/updateUser/{id}")
     public String updateUser(@PathVariable int id, Model model) {
-        nhom8.shoppingweb.model.User user = new nhom8.shoppingweb.model.User();
+        nhom8.shoppingweb.entity.User user = new nhom8.shoppingweb.entity.User();
         user.setID(id);
         model.addAttribute("user", user);
         return "updateUser";
     }
 
     @PostMapping("/updateUser")
-    public String updateUser(@ModelAttribute nhom8.shoppingweb.model.User user) {
+    public String updateUser(@ModelAttribute nhom8.shoppingweb.entity.User user) {
         return Optional.ofNullable(userService.update(user))
                 .map(t -> "fragments/psuccess")
                 .orElse("fragments/pfailed");

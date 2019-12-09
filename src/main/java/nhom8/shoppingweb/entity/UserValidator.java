@@ -4,8 +4,6 @@ import nhom8.shoppingweb.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.thymeleaf.util.StringUtils;
 import java.util.Optional;
-import nhom8.shoppingweb.entity.User;
-import nhom8.shoppingweb.repository.UserDAO;
 
 /*
 Đối tượng này dùng để kiểm tra xem một Object User có hợp lệ không
