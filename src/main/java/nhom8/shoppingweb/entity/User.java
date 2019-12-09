@@ -11,7 +11,7 @@ import lombok.Data;
 public class User implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long ID;
+    private Integer ID;
     private String FULLNAME;
     private String PHONE;
     private String EMAIL;

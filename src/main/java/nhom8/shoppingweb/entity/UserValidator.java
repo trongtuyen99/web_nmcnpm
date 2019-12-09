@@ -1,9 +1,8 @@
 package nhom8.shoppingweb.entity;
 
-import nhom8.shoppingweb.repository.UserDAO;
+import nhom8.shoppingweb.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.thymeleaf.util.StringUtils;
-
 import java.util.Optional;
 import nhom8.shoppingweb.entity.User;
 import nhom8.shoppingweb.repository.UserDAO;
@@ -13,7 +12,7 @@ import nhom8.shoppingweb.repository.UserDAO;
  */
 public class UserValidator {
     @Autowired
-    UserDAO userDAO;
+    UserRepository userRepository;
     /**
      * Kiểm tra một object User có hợp lệ không
      * @param user
@@ -21,7 +20,7 @@ public class UserValidator {
      */
     public boolean isValid(User user) {
         return Optional.ofNullable(user)
-                .filter(t -> userDAO.findUser(user.getUSERNAME()) == null)
+                .filter(t -> userRepository.findByUSERNAME(user.getUSERNAME()) == null)
                 .filter(t -> !StringUtils.isEmpty(t.getFULLNAME())) // Kiểm tra Firstname khác rỗng
                 .filter(t -> !StringUtils.isEmpty(t.getPHONE())) // Kiểm tra Lastname khác rỗng
                 .filter(t -> !StringUtils.isEmpty(t.getEMAIL()))

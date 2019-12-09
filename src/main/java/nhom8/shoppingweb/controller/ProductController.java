@@ -13,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+
 @Controller
 public class ProductController {
     /*
@@ -22,7 +23,7 @@ public class ProductController {
     private ProductService productService;
     @Autowired
     private ProductRepository productRepository;
-    
+
     // thêm sản phẩm mới
     @GetMapping("/addProduct")
     public String addProduct(Model model) {

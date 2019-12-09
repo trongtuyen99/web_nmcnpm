@@ -41,14 +41,14 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 
             </div>
 
-            <form name='f' th:action="@{/j_spring_security_check}" method='POST'>
+            <form th:action="@{/j_spring_security_check}" method='POST'>
                 <div>
                     <span>Username</span>
-                    <input type="text" name="username" value="" maxlength="15" required>
+                    <input type="text" name="username" value="" maxlength="15" required=" ">
                 </div>
                 <div>
                     <span>Password</span>
-                    <input type="password" name="password" value="" maxlength="15" required>
+                    <input type="password" name="password" value="" maxlength="15" required=" ">
                 </div>
                 <div>
                     <span>Remember Me? <input type="checkbox" name="remember-me"> </span>

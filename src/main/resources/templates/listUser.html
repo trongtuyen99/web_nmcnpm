@@ -15,14 +15,20 @@ License URL: http://creativecommons.org/licenses/by/3.0/
         <!--theme-style-->
         <link th:href="@{/css/style.css}" rel="stylesheet" type="text/css" media="all" />	
         <!--//theme-style-->
-        <link th:href="@{/css/form.css}" rel="stylesheet" type="text/css" media="all" />	
-        <!--//theme-style-->
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
         <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
         <!--fonts-->
         <link th:href="@{http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800}" rel="stylesheet" type="text/css">
         <!--//fonts-->
         <script th:src="@{/js/jquery.min.js}"></script>
+        <style>
+            table, th, td, tr {
+                border: 1px solid black;
+            }
+            td {
+                padding-right: 30px;
+            }
+        </style>
     </head>
     <body> 
         <!-- chèn fragment header-->
@@ -31,31 +37,33 @@ License URL: http://creativecommons.org/licenses/by/3.0/
         <div class="container">
             <div class=" single_top">
                 <p><b>PAGE <span th:text="${currentPage}"></span></b></p>
-                <table class="product-list">
+                <table>
                     <tr>
                         <th>Id</th>
-                        <th>Name</th>
-                        <th>Price</th>
-                        <th>Producer</th>
+                        <th>Full Name</th>
+                        <th>Phone</th>
+                        <th>Email</th>
+                        <th>Role</th>
                         <th>View</th>
-                        <th th:if="${#request.isUserInRole('ADMIN')}">Update</th>
-                        <th th:if="${#request.isUserInRole('ADMIN')}">Delete</th>
+                        <th>Update</th>
+                        <th>Delete</th>
                     </tr>
-                    <th:block th:each="product : ${listProduct}">
+                    <th:block th:each="user : ${listUser}">
                         <tr>
-                            <td><a th:text="${product.ID}"></a></td>
-                            <td><a th:text="${product.NAME}"></a></td>
-                            <td><a th:text="${product.PRICE}"></a></td>
-                            <td><a th:text="${product.PRODUCER_ID}"></a></td>
-                            <td><a th:href="@{/viewProduct/} + ${product.ID}">View</a></td>
-                            <td th:if="${#request.isUserInRole('ADMIN')}"><a th:href="@{/updateProduct/} + ${product.ID}">Update</a></td>
-                            <td th:if="${#request.isUserInRole('ADMIN')}"><a th:href="@{/deleteProduct/} + ${product.ID}">Delete</a></td>
+                            <td><a th:text="${user.ID}"></a></td>
+                            <td><a th:text="${user.FULLNAME}"></a></td>
+                            <td><a th:text="${user.PHONE}"></a></td>
+                            <td><a th:text="${user.EMAIL}"></a></td>
+                            <td><a th:text="${user.ROLE}"></a></td>
+                            <td><a th:href="@{/viewUser/} + ${user.ID}">View</a></td>
+                            <td><a th:href="@{/updateUser/} + ${user.ID}">Update</a></td>
+                            <td><a th:href="@{/deleteUser/} + ${user.ID}">Delete</a></td>
                         </tr>
                     </th:block>
                 </table>
                 <p></p>
-                <a th:if="${currentPage > 0}" th:href="@{/listProduct(page=${currentPage-1})}"><span class="on-get">Previous page</span></a>
-                <a th:if="${currentPage < numberOfPages - 1}" th:href="@{/listProduct(page=${currentPage+1})}"><span class="on-get">Next page</span></a>
+                <a th:if="${currentPage > 0}" th:href="@{/listUser(page=${currentPage-1})}"><span class="on-get">Previous page</span></a>
+                <a th:if="${currentPage < numberOfPages}" th:href="@{/listUser(page=${currentPage+1})}"><span class="on-get">Next page</span></a>
                 <div class="clearfix"> </div>
             </div>
 

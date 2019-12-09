@@ -12,7 +12,6 @@ import org.springframework.stereotype.Repository;
 public interface ProductRepository extends JpaRepository<Product, Integer> {
     @Query("SELECT e FROM productdb e")
     Page<Product> findAllProducts(Pageable pageable);
-    
     @Query("SELECT e FROM productdb e WHERE e.NAME like :pattern")
     Page<Product> findProductsByName(Pageable pageable, 
         @Param("pattern") String pattern);

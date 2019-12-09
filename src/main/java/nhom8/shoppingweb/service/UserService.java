@@ -7,7 +7,7 @@ import nhom8.shoppingweb.utils.EncryptedPasswordUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+
 
 
 import java.util.List;
@@ -48,5 +48,18 @@ public class UserService {
             return userRepository.save(user);
         }
         return null;
+    }
+    public User update(User user) {
+        if (uvalidator.isValid(user)) {
+            user.setPASSWORD(EncryptedPasswordUtils.encryptedPassword(user.getPASSWORD()));
+            user.setCPASSWORD(EncryptedPasswordUtils.encryptedPassword(user.getCPASSWORD()));
+            return userRepository.save(user);
+        }
+        return null;
+    }
+
+
+    public Optional<User> findById(int id){
+        return userRepository.findById(id);
     }
 }

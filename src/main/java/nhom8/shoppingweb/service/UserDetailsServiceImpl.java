@@ -3,7 +3,7 @@ package nhom8.shoppingweb.service;
 import java.util.ArrayList;
 import java.util.List;
 
-import nhom8.shoppingweb.repository.UserDAO;
+import nhom8.shoppingweb.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -20,12 +20,11 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     */
 
     @Autowired
-    private UserDAO userDAO;
+    private UserRepository userRepository;
 
     @Override
     public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {
-        nhom8.shoppingweb.entity.User user = this.userDAO.findUser(userName);
-
+        nhom8.shoppingweb.model.User user = userRepository.findByUSERNAME(userName);
         if (user == null) {
             System.out.println("User not found! " + userName);
             throw new UsernameNotFoundException("User " + userName + " was not found in the database");
