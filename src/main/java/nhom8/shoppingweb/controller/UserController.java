@@ -76,7 +76,7 @@ public class UserController {
     public String userDelete(@PathVariable int id, Model model) {
         userRepository.deleteById(id);
         model.addAttribute("listUser", userRepository.findAll());
-        return "fragments/dsuccess";
+        return "fragments/success";
     }
 
     // sửa User
@@ -91,7 +91,7 @@ public class UserController {
     @PostMapping("/updateUser")
     public String updateUser(@ModelAttribute nhom8.shoppingweb.entity.User user) {
         return Optional.ofNullable(userService.update(user))
-                .map(t -> "fragments/psuccess")
-                .orElse("fragments/pfailed");
+                .map(t -> "fragments/success")
+                .orElse("fragments/failed");
     }
 }

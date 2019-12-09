@@ -58,6 +58,26 @@ public class ProductController {
         model.addAttribute("currentPage", page);
         return "listProduct";
     }
+
+    @RequestMapping("/listProductUser")
+    public String listProductUser(Model model,
+                              @RequestParam(name = "page", required = false, defaultValue = "0") Integer page,
+                              @RequestParam(name = "size", required = false, defaultValue = "6") Integer size,
+                              @RequestParam(name = "sort", required = false, defaultValue = "ASC") String sort) {
+        Sort sortable = null;
+        if (sort.equals("ASC")) {
+            sortable = Sort.by("id").ascending();
+        }
+        if (sort.equals("DESC")) {
+            sortable = Sort.by("id").descending();
+        }
+        Pageable pageable = PageRequest.of(page, size, sortable);
+        Page<Product> pageProduct = productRepository.findAllProducts(pageable);
+        model.addAttribute("listProduct", pageProduct);
+        model.addAttribute("numberOfPages", pageProduct.getTotalPages());
+        model.addAttribute("currentPage", page);
+        return "listProductUser";
+    }
     
     // hiển thị danh sách sản phẩm có chứa chuỗi pattern trong tên
     @RequestMapping("/listProductSearch")
