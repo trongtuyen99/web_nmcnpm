@@ -1,5 +1,6 @@
 package nhom8.shoppingweb.service;
 
+import nhom8.shoppingweb.model.Product;
 import nhom8.shoppingweb.model.User;
 import nhom8.shoppingweb.model.UserValidator;
 import nhom8.shoppingweb.repository.UserRepository;
@@ -48,5 +49,18 @@ public class UserService {
             return userRepository.save(user);
         }
         return null;
+    }
+    public User update(User user) {
+        if (uvalidator.isValid(user)) {
+            user.setPASSWORD(EncryptedPasswordUtils.encryptedPassword(user.getPASSWORD()));
+            user.setCPASSWORD(EncryptedPasswordUtils.encryptedPassword(user.getCPASSWORD()));
+            return userRepository.save(user);
+        }
+        return null;
+    }
+
+
+    public Optional<User> findById(int id){
+        return userRepository.findById(id);
     }
 }

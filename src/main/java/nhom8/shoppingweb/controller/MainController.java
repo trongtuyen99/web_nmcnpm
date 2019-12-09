@@ -8,7 +8,6 @@ import nhom8.shoppingweb.repository.UserRepository;
 import nhom8.shoppingweb.service.MessageService;
 import nhom8.shoppingweb.service.UserService;
 import nhom8.shoppingweb.utils.WebUtils;
-import nhom8.shoppingweb.service.UserDetailsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.User;
@@ -29,21 +28,7 @@ public class MainController {
     @Autowired
     private UserRepository userRepository;
 
-    @GetMapping("/register.html")
-    public String addUser(Model model) {
-        model.addAttribute("user", new nhom8.shoppingweb.model.User());
-        return "register";
-    }
 
-    /*
-    @ModelAttribute đánh dấu đối tượng User được gửi lên bởi Form Request
-     */
-    @PostMapping("/register.html")
-    public String addUser(@ModelAttribute nhom8.shoppingweb.model.User user) {
-        return Optional.ofNullable(userService.add(user))
-                .map(t -> "success")
-                .orElse("failed");
-    }
     @GetMapping("/contact.html")
     public String addMessage(Model model) {
         model.addAttribute("msg", new Message());
@@ -56,8 +41,8 @@ public class MainController {
     @PostMapping("/contact.html")
     public String addMessage(@ModelAttribute Message msg) {
         return Optional.ofNullable(messageService.add(msg))
-                .map(t -> "msuccess")
-                .orElse("mfailed");
+                .map(t -> "fragments/msuccess")
+                .orElse("fragments/mfailed");
     }
 
 
@@ -79,35 +64,9 @@ public class MainController {
         model.addAttribute("userInfo", userInfo);
         // Trả về đối tượng userList.
         model.addAttribute("userList", userService.findAll(limit));
+        model.addAttribute("messageList", messageService.findAll(limit));
         return "adminPage";
     }
-    @RequestMapping(value = {"/userInfo","/userAccountInfo"}, method = RequestMethod.GET)
-    public String userInfo(Model model, Principal principal) {
-
-        // Sau khi user login thành công, sẽ có principal
-        String userName = principal.getName();
-
-        System.out.println("User Name: " + userName);
-
-        User loginedUser = (User) ((Authentication) principal).getPrincipal();
-        String userInfo = WebUtils.toString(loginedUser);
-
-        nhom8.shoppingweb.model.User user = userRepository.findByUSERNAME(userName);
-        String USERNAME = user.getUSERNAME();
-        String FULLNAME = user.getFULLNAME();
-        String PHONE = user.getPHONE();
-        String EMAIL = user.getEMAIL();
-        String ROLE = user.getROLE();
-
-        model.addAttribute("userInfo", userInfo);
-        model.addAttribute("USERNAME", USERNAME);
-        model.addAttribute("FULLNAME", FULLNAME);
-        model.addAttribute("PHONE", PHONE);
-        model.addAttribute("EMAIL", EMAIL);
-        model.addAttribute("ROLE", ROLE);
-        return "userInfoPage";
-    }
-
 
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public String login(Model model) {
@@ -144,7 +103,7 @@ public class MainController {
 
         return "403Page";
     }
-    @RequestMapping(value = "/index.html", method = RequestMethod.GET)
+    @RequestMapping(value = {"/index.html","index"}, method = RequestMethod.GET)
     public String index(Model model){
         return "index";
     }
@@ -159,4 +118,8 @@ public class MainController {
         return "single.html";
     }
 
+    @RequestMapping(value = "/adminControlPanel.html", method = RequestMethod.GET)
+    public String single(){
+        return "adminControlPanel.html";
+    }
 }

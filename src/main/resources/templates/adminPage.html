@@ -16,7 +16,7 @@
     <br/><br/>
 
     <div th:if="${userInfo != null}" th:utext="${userInfo}"></div>
-        <h3>Danh sách User: </h3>
+        <h3 style="color: #3a5795">Danh sách User: </h3>
 
             <!--Duyệt qua toàn bộ phần tử trong biến "userList"-->
 <!--            <li th:each="user : ${userList}">-->
@@ -37,7 +37,21 @@
                         <td th:text="*{user.getROLE()}"></td>
                     </tr>
                 </table>
-
+        <h3 style="color: #3a5795">Danh sách các phản hồi: </h3>
+        <table border="1" style="width: auto">
+            <tr>
+                <th>Name</th>
+                <th>Subject</th>
+                <th>Email</th>
+                <th>Phone</th>
+                <th>Message</th>
+            </tr>
+            <tr th:each="msg : ${messageList}">
+                <td th:text="*{msg.getNAME()}"></td>
+                <td th:text="*{msg.getEMAIL()}"></td>
+                <td th:text="*{msg.getMESSAGE()}"></td>
+            </tr>
+        </table>
 
 </body>
 

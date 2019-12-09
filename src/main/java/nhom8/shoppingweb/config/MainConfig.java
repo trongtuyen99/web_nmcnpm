@@ -1,6 +1,7 @@
 package nhom8.shoppingweb.config;
 
 import nhom8.shoppingweb.model.MessageValidator;
+import nhom8.shoppingweb.model.ProductValidator;
 import nhom8.shoppingweb.model.UserValidator;
 import nhom8.shoppingweb.service.UserDetailsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -53,7 +54,15 @@ public class MainConfig extends WebSecurityConfigurerAdapter {
         http.authorizeRequests().antMatchers("/userInfo").access("hasAnyRole('ROLE_USER ', 'ROLE_ADMIN')");
 
         // Các trang yêu cầu phải login với vai trò ROLE_ADMIN
-        http.authorizeRequests().antMatchers("/admin").access("hasRole('ROLE_ADMIN')");
+        http.authorizeRequests().antMatchers("/admin", "/adminControlPanel",
+                "/addProduct", "/listProduct",
+                "/deleteProduct", "/updateProduct",
+                "/deleteProduct/{id}", "/updateProduct/{id}","/addUser", "/listUser",
+                "/deleteUser", "/updateUser",
+                "/deleteUser/{id}", "/updateUser/{id}").access("hasRole('ROLE_ADMIN')");
+//        http.authorizeRequests().antMatchers(
+//                "/contact.html"
+//        ).access("hasRole('ROLE_USER ')");
 
         // Khi người dùng đã login, với vai trò XX.
         // Nhưng truy cập vào trang yêu cầu vai trò YY,
@@ -79,12 +88,12 @@ public class MainConfig extends WebSecurityConfigurerAdapter {
 
     }
 
-    @Bean
-    public PersistentTokenRepository persistentTokenRepository() {
-        // lưu token trong memory
-        InMemoryTokenRepositoryImpl memory = new InMemoryTokenRepositoryImpl();
-        return memory;
-    }
+//    @Bean
+//    public PersistentTokenRepository persistentTokenRepository() {
+//        // lưu token trong memory
+//        InMemoryTokenRepositoryImpl memory = new InMemoryTokenRepositoryImpl();
+//        return memory;
+//    }
     public class UserConfig {
         /**
          * Tạo ra Bean UserValidator để sử dụng sau này
@@ -103,6 +112,16 @@ public class MainConfig extends WebSecurityConfigurerAdapter {
         @Bean
         public MessageValidator mvalidator() {
             return new MessageValidator();
+        }
+    }
+    public class ProductConfig {
+        /**
+         * Tạo ra Bean ProductValidator để sử dụng sau này
+         * @return
+         */
+        @Bean
+        public ProductValidator pvalidator() {
+            return new ProductValidator();
         }
     }
 }
