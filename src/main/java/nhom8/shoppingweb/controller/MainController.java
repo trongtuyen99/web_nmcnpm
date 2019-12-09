@@ -37,8 +37,8 @@ public class MainController {
     @PostMapping("/contact")
     public String addMessage(@ModelAttribute Message msg) {
         return Optional.ofNullable(messageService.add(msg))
-                .map(t -> "fragments/success")
-                .orElse("fragments/failed");
+                .map(t -> "success")
+                .orElse("failed");
     }
 
     @RequestMapping(value = "/adminControlPanel", method = RequestMethod.GET)

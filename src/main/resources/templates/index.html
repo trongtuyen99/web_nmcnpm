@@ -32,7 +32,7 @@
             <h5 class="latest-product">ALL PRODUCTS</h5>
             <a class="view-all" th:href="@{/listProduct}">VIEW ALL<span> </span></a>
         </div>
-        <div class="product-left" th:each="product: ${listProduct}">
+        <div class="product-list" th:each="product: ${listProduct}">
             <div class="col-md-4 chain-grid grid-top-chain">
                 <a th:href="@{/viewProduct/} + ${product.ID}"><img class="img-responsive chain" th:src="@{${product.IMAGE}}" alt="File not found"></a>
                 <span class="star"> </span>

@@ -38,8 +38,8 @@ public class UserController {
     @PostMapping("/register")
     public String addUser(@ModelAttribute nhom8.shoppingweb.model.User user) {
         return Optional.ofNullable(userService.add(user))
-                .map(t -> "fragments/rsuccess")
-                .orElse("fragments/rfailed");
+                .map(t -> "success")
+                .orElse("failed");
     }
 
 
@@ -79,7 +79,7 @@ public class UserController {
     public String userDelete(@PathVariable int id, Model model) {
         userRepository.deleteById(id);
         model.addAttribute("listUser", userRepository.findAll());
-        return "fragments/dsuccess";
+        return "success";
     }
 
     // sửa User
@@ -94,7 +94,7 @@ public class UserController {
     @PostMapping("/updateUser")
     public String updateUser(@ModelAttribute nhom8.shoppingweb.model.User user) {
         return Optional.ofNullable(userService.update(user))
-                .map(t -> "fragments/psuccess")
-                .orElse("fragments/pfailed");
+                .map(t -> "success")
+                .orElse("failed");
     }
 }

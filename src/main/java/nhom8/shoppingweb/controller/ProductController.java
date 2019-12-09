@@ -34,16 +34,16 @@ public class ProductController {
     @PostMapping("/addProduct")
     public String addProduct(@ModelAttribute nhom8.shoppingweb.model.Product product) {
         return Optional.ofNullable(productService.add(product))
-                .map(t -> "fragments/success")
-                .orElse("fragments/failed");
+                .map(t -> "success")
+                .orElse("failed");
     }
 
     // hiển thị danh sách sản phẩm (đã phân trang)
     @RequestMapping("/listProduct")
     public String listProduct(Model model,
-                               @RequestParam(name = "page", required = false, defaultValue = "0") Integer page,
-                               @RequestParam(name = "size", required = false, defaultValue = "10") Integer size,
-                               @RequestParam(name = "sort", required = false, defaultValue = "ASC") String sort) {
+                              @RequestParam(name = "page", required = false, defaultValue = "0") Integer page,
+                              @RequestParam(name = "size", required = false, defaultValue = "10") Integer size,
+                              @RequestParam(name = "sort", required = false, defaultValue = "ASC") String sort) {
         Sort sortable = null;
         if (sort.equals("ASC")) {
             sortable = Sort.by("id").ascending();
@@ -57,6 +57,25 @@ public class ProductController {
         model.addAttribute("numberOfPages", pageProduct.getTotalPages());
         model.addAttribute("currentPage", page);
         return "listProduct";
+    }
+    @RequestMapping("/listProductUser")
+    public String listProductUser(Model model,
+                                  @RequestParam(name = "page", required = false, defaultValue = "0") Integer page,
+                                  @RequestParam(name = "size", required = false, defaultValue = "6") Integer size,
+                                  @RequestParam(name = "sort", required = false, defaultValue = "ASC") String sort) {
+        Sort sortable = null;
+        if (sort.equals("ASC")) {
+            sortable = Sort.by("id").ascending();
+        }
+        if (sort.equals("DESC")) {
+            sortable = Sort.by("id").descending();
+        }
+        Pageable pageable = PageRequest.of(page, size, sortable);
+        Page<Product> pageProduct = productRepository.findAllProducts(pageable);
+        model.addAttribute("listProduct", pageProduct);
+        model.addAttribute("numberOfPages", pageProduct.getTotalPages());
+        model.addAttribute("currentPage", page);
+        return "listProductUser";
     }
     
     // hiển thị danh sách sản phẩm có chứa chuỗi pattern trong tên
@@ -119,7 +138,7 @@ public class ProductController {
     @RequestMapping("/deleteProduct/{id}")
     public String productDelete(@PathVariable int id) {
         productRepository.deleteById(id);
-        return "fragments/success";
+        return "success";
     }
 
     // sửa sản phẩm
@@ -134,7 +153,7 @@ public class ProductController {
     @PostMapping("/updateProduct")
     public String updateProduct(@ModelAttribute nhom8.shoppingweb.model.Product product) {
         return Optional.ofNullable(productService.update(product))
-                .map(t -> "fragments/success")
-                .orElse("fragments/failed");
+                .map(t -> "success")
+                .orElse("failed");
     }
 }

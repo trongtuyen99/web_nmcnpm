@@ -12,7 +12,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
         <link th:href="@{/css/bootstrap.css}" rel="stylesheet" type="text/css" media="all" />
         <!--theme-style-->
-        <link th:href="@{/css/style.css}" rel="stylesheet" type="text/css" media="all" />	
+        <link th:href="@{/css/style.css}" rel="stylesheet" type="text/css" media="all" />
         <!--//theme-style-->
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
         <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
@@ -28,7 +28,8 @@ License URL: http://creativecommons.org/licenses/by/3.0/
         <div class="container">
             <!-- your code goes here -->
             <div class="register">
-                <h1 style="color: limegreen">Delete successfully</h1>
+                <h1 style="color: limegreen">Executed successfully!</h1>
+                <input type="button" value="Go back" onclick = "window.history.back()"/>
             </div>
             <!-- chèn fragment sub-cate -->
             <div th:replace="/fragments/sub-cate :: sub-cate"/>

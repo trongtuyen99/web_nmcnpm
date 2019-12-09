@@ -13,6 +13,8 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.authentication.rememberme.InMemoryTokenRepositoryImpl;
+import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
 
 @Configuration
 @EnableWebSecurity
@@ -54,11 +56,12 @@ public class MainConfig extends WebSecurityConfigurerAdapter {
 
         // Các trang yêu cầu phải login với vai trò ROLE_ADMIN
         http.authorizeRequests().antMatchers("/admin", "/adminControlPanel",
-                "/addProduct", "/listProduct",
-                "/deleteProduct", "/updateProduct",
-                "/deleteProduct/{id}", "/updateProduct/{id}","/addUser", "/listUser",
-                "/deleteUser", "/updateUser",
-                "/deleteUser/{id}", "/updateUser/{id}").access("hasRole('ROLE_ADMIN')");
+                "/addProduct", "/listProduct", "/deleteProduct", "/updateProduct",
+                "/deleteProduct/{id}", "/updateProduct/{id}","/addUser", "/listUser", "/deleteUser", "/updateUser", "/deleteUser/{id}", "/updateUser/{id}",
+                "/addProducer", "/deleteProducer", "/deleteProducer/{id}",
+                "/listOrder", "/deleteOrder", "/deleteOrder/{id}",
+                "/listFeedback")
+                .access("hasRole('ROLE_ADMIN')");
 //        http.authorizeRequests().antMatchers(
 //                "/contact.html"
 //        ).access("hasRole('ROLE_USER ')");
@@ -80,19 +83,19 @@ public class MainConfig extends WebSecurityConfigurerAdapter {
                 // Cấu hình cho Logout Page.
                 .and().logout().logoutUrl("/logout").logoutSuccessUrl("/index");
 
-        // Cấu hình Remember Me.
-//        http.authorizeRequests().and()
-//                .rememberMe().tokenRepository(this.persistentTokenRepository())
-//                .tokenValiditySeconds(86400); // = 24h
+       //  Cấu hình Remember Me.
+       http.authorizeRequests().and()
+                .rememberMe().tokenRepository(this.persistentTokenRepository())
+                .tokenValiditySeconds(86400); // = 24h
 
     }
 
-//    @Bean
-//    public PersistentTokenRepository persistentTokenRepository() {
-//        // lưu token trong memory
-//        InMemoryTokenRepositoryImpl memory = new InMemoryTokenRepositoryImpl();
-//        return memory;
-//    }
+    @Bean
+    public PersistentTokenRepository persistentTokenRepository() {
+        // lưu token trong memory
+        InMemoryTokenRepositoryImpl memory = new InMemoryTokenRepositoryImpl();
+        return memory;
+    }
     public class UserConfig {
         @Bean
         public UserValidator uvalidator() {

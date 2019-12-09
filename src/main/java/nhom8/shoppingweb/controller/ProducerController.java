@@ -27,8 +27,8 @@ public class ProducerController {
     @PostMapping("/addProducer")
     public String addProducer(@ModelAttribute nhom8.shoppingweb.model.Producer producer) {
         return Optional.ofNullable(producerService.add(producer))
-                .map(t -> "fragments/success")
-                .orElse("fragments/failed");
+                .map(t -> "success")
+                .orElse("failed");
     }
 
     // hiển thị danh sách nsx (đã phân trang)
@@ -56,6 +56,6 @@ public class ProducerController {
     public String producerDelete(@PathVariable int id, Model model) {
         producerRepository.deleteById(id);
         model.addAttribute("listProducer", producerRepository.findAll());
-        return "fragments/success";
+        return "success";
     }
 }

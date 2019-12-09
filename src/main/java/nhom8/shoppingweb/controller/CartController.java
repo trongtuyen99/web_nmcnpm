@@ -66,7 +66,7 @@ public class CartController {
     @RequestMapping("/deleteOrder/{id}")
     public String deleteOrder(@PathVariable int id) {
         orderRepository.deleteById(id);
-        return "fragments/success";
+        return "success";
     }
     
     @GetMapping("/addToCart/{id}")
@@ -79,7 +79,7 @@ public class CartController {
         }
         cart.addItem(id);
         session.setAttribute("cart", cart);
-        return "/fragments/success";
+        return "success";
     }
     
     @RequestMapping("/cart")
@@ -97,10 +97,10 @@ public class CartController {
             if (cart.getCartItems().containsKey(id)){
                 cart.deleteItem(id);
                 session.setAttribute("cart", cart);
-                return "/fragments/success";
+                return "success";
             }
         }
-        return "/fragments/failed";
+        return "failed";
     }
     
     @RequestMapping(value = "/buy", method = {RequestMethod.GET, RequestMethod.POST})
@@ -115,7 +115,7 @@ public class CartController {
             model.addAttribute("address", new String());
             return "/order";
         }
-        return "fragments/failed";
+        return "failed";
     }
     
     @PostMapping("/order")
@@ -128,18 +128,20 @@ public class CartController {
             Optional<Product> o_product = productRepository.findById(id);
             if (o_product.isPresent()) {  
                 Product product = o_product.get();
-                Order order = new Order();
-                order.setPRODUCT_ID(id);
-                order.setQUANTITY(quantity);
-                order.setADDRESS(address);
-                order.setPRICE(quantity * product.getPRICE());
-                order.setCREATED_TIME(new Date());
-                orderRepository.save(order);
-                cart.deleteItem(id);
-                session.setAttribute("cart", cart);
-                return "/fragments/success";
+                if (product.getSTOCK_NUMBER() - quantity >= 0) {
+                    Order order = new Order();
+                    order.setPRODUCT_ID(id);
+                    order.setQUANTITY(quantity);
+                    order.setADDRESS(address);
+                    order.setPRICE(quantity * product.getPRICE());
+                    order.setCREATED_TIME(new Date());
+                    orderRepository.save(order);
+                    cart.deleteItem(id);
+                    session.setAttribute("cart", cart);
+                    return "success";
+                }
             }
         }
-        return "/fragments/failed";
+        return "failed";
     }
 }

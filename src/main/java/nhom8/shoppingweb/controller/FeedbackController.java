@@ -45,37 +45,5 @@ public class FeedbackController {
     }
 
 
-    // hiển thị User có ID = {id}
-//    @RequestMapping("/viewFeedback/{id}")
-//    public String viewUser(@PathVariable int id, Model model) {
-//        Optional<nhom8.shoppingweb.model.Message> message = messageRepository.findById(id);
-//        if (message.isPresent()) {
-//            model.addAttribute("msg", message.get());
-//        }
-//        return "viewFeedback";
-//    }
 
-    // xóa User có ID = {id}
-//    @RequestMapping("/deleteUser/{id}")
-//    public String userDelete(@PathVariable int id, Model model) {
-//        userRepository.deleteById(id);
-//        model.addAttribute("listUser", userRepository.findAll());
-//        return "fragments/dsuccess";
-//    }
-
-    // sửa User
-//    @GetMapping("/updateUser/{id}")
-//    public String updateUser(@PathVariable int id, Model model) {
-//        nhom8.shoppingweb.model.User user = new nhom8.shoppingweb.model.User();
-//        user.setID(id);
-//        model.addAttribute("user", user);
-//        return "updateUser";
-//    }
-//
-//    @PostMapping("/updateUser")
-//    public String updateUser(@ModelAttribute nhom8.shoppingweb.model.User user) {
-//        return Optional.ofNullable(userService.update(user))
-//                .map(t -> "fragments/psuccess")
-//                .orElse("fragments/pfailed");
-//    }
 }
