@@ -41,7 +41,7 @@ public class ProductController {
     @RequestMapping("/listProduct")
     public String listProduct(Model model,
                                @RequestParam(name = "page", required = false, defaultValue = "0") Integer page,
-                               @RequestParam(name = "size", required = false, defaultValue = "2") Integer size,
+                               @RequestParam(name = "size", required = false, defaultValue = "10") Integer size,
                                @RequestParam(name = "sort", required = false, defaultValue = "ASC") String sort) {
         Sort sortable = null;
         if (sort.equals("ASC")) {
@@ -62,7 +62,7 @@ public class ProductController {
     @RequestMapping("/listProductSearch")
     public String listProductSearch(Model model,
                                @RequestParam(name = "page", required = false, defaultValue = "0") Integer page,
-                               @RequestParam(name = "size", required = false, defaultValue = "2") Integer size,
+                               @RequestParam(name = "size", required = false, defaultValue = "10") Integer size,
                                @RequestParam(name = "sort", required = false, defaultValue = "ASC") String sort,
                                @RequestParam(name = "pattern", required = true, defaultValue = "ASC") String pattern) {
         Sort sortable = null;
@@ -85,7 +85,7 @@ public class ProductController {
     @RequestMapping("/listProductByProducerID")
     public String listProductByProducerID(Model model,
                                @RequestParam(name = "page", required = false, defaultValue = "0") Integer page,
-                               @RequestParam(name = "size", required = false, defaultValue = "2") Integer size,
+                               @RequestParam(name = "size", required = false, defaultValue = "10") Integer size,
                                @RequestParam(name = "sort", required = false, defaultValue = "ASC") String sort,
                                @RequestParam(name = "producerID", required = true, defaultValue = "ASC") int producerID) {
         Sort sortable = null;

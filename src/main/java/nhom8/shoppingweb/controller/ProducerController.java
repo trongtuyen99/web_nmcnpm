@@ -35,7 +35,7 @@ public class ProducerController {
     @RequestMapping("/listProducer")
     public String listProducer(Model model,
                                @RequestParam(name = "page", required = false, defaultValue = "0") Integer page,
-                               @RequestParam(name = "size", required = false, defaultValue = "2") Integer size,
+                               @RequestParam(name = "size", required = false, defaultValue = "10") Integer size,
                                @RequestParam(name = "sort", required = false, defaultValue = "ASC") String sort) {
         Sort sortable = null;
         if (sort.equals("ASC")) {

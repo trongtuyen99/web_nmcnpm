@@ -37,31 +37,4 @@ public class UserController {
                 .map(t -> "fragments/success")
                 .orElse("fragments/failed");
     }
-
-    @RequestMapping(value = {"/userInfo","/userAccountInfo"}, method = RequestMethod.GET)
-    public String userInfo(Model model, Principal principal) {
-
-        // Sau khi user login thành công, sẽ có principal
-        String userName = principal.getName();
-        System.out.println("User Name: " + userName);
-
-        User loginedUser = (User) ((Authentication) principal).getPrincipal();
-        String userInfo = WebUtils.toString(loginedUser);
-
-        nhom8.shoppingweb.entity.User user = userDAO.findUser(userName);
-        String USERNAME = user.getUSERNAME();
-        String FULLNAME = user.getFULLNAME();
-        String PHONE = user.getPHONE();
-        String EMAIL = user.getEMAIL();
-        String ROLE = user.getROLE();
-
-        model.addAttribute("userInfo", userInfo);
-        model.addAttribute("USERNAME", USERNAME);
-        model.addAttribute("FULLNAME", FULLNAME);
-        model.addAttribute("PHONE", PHONE);
-        model.addAttribute("EMAIL", EMAIL);
-        model.addAttribute("ROLE", ROLE);
-        return "userInfoPage";
-    }
-
 }

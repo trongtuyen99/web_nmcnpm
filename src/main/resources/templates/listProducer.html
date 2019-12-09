@@ -15,20 +15,14 @@ License URL: http://creativecommons.org/licenses/by/3.0/
         <!--theme-style-->
         <link th:href="@{/css/style.css}" rel="stylesheet" type="text/css" media="all" />	
         <!--//theme-style-->
+        <link th:href="@{/css/form.css}" rel="stylesheet" type="text/css" media="all" />	
+        <!--//theme-style-->
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
         <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
         <!--fonts-->
         <link th:href="@{http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800}" rel="stylesheet" type="text/css">
         <!--//fonts-->
         <script th:src="@{/js/jquery.min.js}"></script>
-        <style>
-            table, th, td, tr {
-                border: 1px solid black;
-            }
-            td {
-                padding-right: 30px;
-            }
-        </style>
     </head>
     <body> 
         <!-- chèn fragment header-->
@@ -37,12 +31,12 @@ License URL: http://creativecommons.org/licenses/by/3.0/
         <div class="container">
             <div class=" single_top">
                 <p><b>PAGE <span th:text="${currentPage}"></span></b></p>
-                <table>
+                <table class="product-list">
                     <tr>
                         <th>Id</th>
                         <th>Name</th>
                         <th>Website</th>
-                        <th th:if="${#request.isUserInRole('USER ')}">See list products</th>
+                        <th>See list products</th>
                         <th th:if="${#request.isUserInRole('ADMIN')}">Delete</th>
                     </tr>
                     <th:block th:each="producer : ${listProducer}">
@@ -50,7 +44,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                             <td><a th:text="${producer.ID}"></a></td>
                             <td><a th:text="${producer.NAME}"></a></td>
                             <td><a th:text="${producer.WEBSITE}"></a></td>
-                            <td th:if="${#request.isUserInRole('USER ')}"><a th:href="@{/listProductByProducerID(producerID=${producer.ID})}">See</a></td>
+                            <td><a th:href="@{/listProductByProducerID(producerID=${producer.ID})}">See</a></td>
                             <td th:if="${#request.isUserInRole('ADMIN')}"><a th:href="@{/deleteProducer/} + ${producer.ID}">Delete</a></td>
                         </tr>
                     </th:block>
