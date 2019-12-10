@@ -43,7 +43,7 @@ public class FeedbackController {
     @RequestMapping("/listFeedback")
     public String listUser(Model model,
                            @RequestParam(name = "page", required = false, defaultValue = "0") Integer page,
-                           @RequestParam(name = "size", required = false, defaultValue = "1") Integer size,
+                           @RequestParam(name = "size", required = false, defaultValue = "10") Integer size,
                            @RequestParam(name = "sort", required = false, defaultValue = "ASC") String sort) {
         Sort sortable = null;
         if (sort.equals("ASC")) {
